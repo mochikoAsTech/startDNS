@@ -1,10 +1,29 @@
 PREDEF:
-  - preface.re
+# はじめに
+  - introduction.re
 
 CHAPS:
-  - article.re
+# ドメインとWhois
+  - domain.re
+
+# DNSとは
+  - whatIsDns.re
+
+# AWSのネームサーバ（Route53）を使ってみよう
+  - aws.re
+
+# digとwhoisを叩いて学ぶ
+  - dig.re
+
+# トラブルシューティング
+  - trouble.re
 
 APPENDIX:
+# 何か付録があれば
+  - loveIsSelfishSunshine.re
 
 POSTDEF:
+# あとがき
+  - postscript.re
+# 執筆者一覧
   - contributors.re
