@@ -24,6 +24,7 @@ mochikoAsTech
 == Special Thanks:
 
  * 初めての本作りに奮闘する姿を見守ってくれた猫と旦那様と息子
+ * きゃすね @casnail
 
 === レビュアー
 
