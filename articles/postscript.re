@@ -8,7 +8,7 @@
 
 自分自身が「Apacheってなんだっけ・・・？なんとかdで終わる名前のやつ・・・？」みたいな状態から始まったので、今でも「分からない人の気持ち」、そして「技術を学びたいけどどこから始めたらいいのか途方に暮れる人の不安な気持ち」は痛いほど分かります。
 
-この本がDNSが分からなくて困っている誰かの役に立てば、それ以上に嬉しいことはありません。
+本著がDNSが分からなくて困っている誰かの役に立てば、それ以上に嬉しいことはありません。
 
 数ある技術本の中から「DNSをはじめよう」を手に取ってくださったあなたに感謝します。
 
@@ -29,8 +29,12 @@ mochikoAsTech
 === レビュアー
 
  * 深澤俊
+ * Takeshi Matsuba
 
-=== 参考書
+=== 参考書籍
 
- * ワンストップ！ 技術同人誌を書こう　親方@oyakata2438
- * 技術書をかこう！～はじめてのReVIEW～　Techbooster
+ * [ワンストップ！ 技術同人誌を書こう - 親方@oyakata2438](https://oyakata.booth.pm/items/708196)
+ * [技術書をかこう！ ～はじめてのRe:VIEW～ 改訂版 - Techbooster](https://techbooster.booth.pm/items/586727)
+ * [プロフェッショナルIPv6 - 小川 晃通](https://www.lambdanote.com/products/ipv6)
+ * [DNSがよくわかる教科書 - 株式会社日本レジストリサービス(JPRS)](https://www.amazon.co.jp/dp/B07KQSRZ1S/)
+ * [DNSDNS Resolution - Cryptic Command](https://cryptic-command.booth.pm/items/1317266)
