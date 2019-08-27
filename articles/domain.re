@@ -572,14 +572,14 @@ Whois検索はレジストリが提供しているサービスです。レジス
 
 === JPRS WHOISでドメイン名の所有者情報を見てみよう
 
-たとえば.jpで終わるドメインを管理しているJPRSが提供する「Whois情報確認サイト」はこちら（@<img>{jprsWhois}）@<fn>{jprsWhois}です。
+たとえば.jpで終わるドメイン名を管理しているJPRSが提供する「Whois情報確認サイト」はこちら（@<img>{jprsWhois}）@<fn>{jprsWhois}です。
 
 //image[jprsWhois][JPRS WHOIS][scale=0.8]{
 //}
 
 //footnote[jprsWhois][@<href>{http://whois.jprs.jp/}]
 
-例として検索キーワードに日清カップヌードルの「cupnoodle.jp」を入れて検索（@<img>{cupnoodleWhois}）してみると、cupnoodle.jpのWhois情報が出てきます。登録者名を見れば「cupnoodle.jpというドメイン名の持ち主は日清食品株式会社なんだな」と分かりますし、登録年月日や有効期限を見れば「2001/03/26から使い始めて2018/03/31が次の更新タイミングなんだな」と分かります。
+例として検索キーワードに日清カップヌードルの「cupnoodle.jp」を入れて検索（@<img>{cupnoodleWhois}）してみると、cupnoodle.jpのWhois情報が出てきます。登録者名を見れば「cupnoodle.jpというドメイン名の持ち主は日清食品株式会社なんだな」と分かりますし、登録年月日や有効期限を見れば「2001/03/26から使い始めて2020/03/31が次の更新タイミングなんだな」と分かります。
 
 //image[cupnoodleWhois][cupnoodle.jpのWhois情報][scale=0.8]{
 //}
