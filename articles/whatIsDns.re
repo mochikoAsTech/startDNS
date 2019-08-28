@@ -44,7 +44,6 @@ DNSサーバのDNSはDomain Name Systemの略で、日本語に直訳すると�
 
 これは使用するフルリゾルバを故障中のOCNのものからGoogle Public DNSに変更したことで名前解決が出来るようになってサイトも見られるようになった、ということです。
 
-
 フルリゾルバはもちろんサーバでも使っています。Linuxサーバなら/etc/resolv.confというファイルを見てみましょう。resolv.confのnameserverという項目で指定されているのがそのサーバのフルリゾルバです。
 
 //cmd{
