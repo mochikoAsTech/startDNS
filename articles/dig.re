@@ -14,78 +14,79 @@ CentOSやAmazonLinuxなどのサーバ環境がある人は、そこでrootに�
 
 //cmd{
 digコマンドのインストール
-# @<b>{yum -y install bind-utils}
+# yum -y install bind-utils
 
 whoisコマンドのインストール
-# @<b>{yum install -y jwhois}
+# yum install -y jwhois
 //}
 
 === MacもLinuxのサーバ環境もない場合
 
-パソコンはWindowsだしコマンドを叩けるような環境はない…という方は、Route53を使うために折角AWSでアカウントを作ったので、EC2@<fn>{ec2}でインスタンス@<fn>{instance}を立ててみるのがお勧めです。サーバスペックごとにインスタンスタイプという区分があるのですが、t2.microというインスタンスタイプならアカウント作成から1年間は毎月750時間まで無料で使えます。ここでは詳しく説明しませんが、AWSのマネジメントコンソールでEC2ダッシュボードを開いて「インスタンスの作成」を押したら、後は画面の表示に従ってぽちぽち選んでいくだけで5分もあればすぐにサーバが作れます。@<fn>{750h}
+パソコンはWindowsだし手近にコマンドを叩けるような環境はない…という方は、Route53を使うために折角AWSでアカウントを作ったので、EC2@<fn>{ec2}でインスタンス@<fn>{instance}を立ててみるのがお勧めです。サーバスペックごとにインスタンスタイプという区分があるのですが、t2.microというインスタンスタイプならアカウント作成から1年間は毎月750時間まで無料で使えます。ここでは詳しく説明しませんが@<fn>{startAws}、AWSのマネジメントコンソールでEC2ダッシュボードを開いて「インスタンスの作成」を押したら、後は画面の表示に従ってぽちぽち選んでいくだけで5分もあればすぐにサーバが作れます。@<fn>{750h}
 
 インスタンス立てるのはちょっと無理！という場合は、@<chapref>{aws}で使った「nslookup(dig)テスト【DNSサーバ接続確認】」@<fn>{cmanUrl3}というページや各レジストリのWhois情報確認サイトで疑似的にdigやwhoisを叩く形で代用しても構いません。
 
-//footnote[ec2][Elastic Compute Cloudの略。AWSにはいろいろなサービスがありますがEC2はいわゆるサーバのことです。]
-//footnote[instance][AWSではサーバのことをインスタンスを呼びます。]
-//footnote[750h][月に750時間まで無料とありますが24時間×31日で744時間なので要は1年間ずっと無料ということです。]
+//footnote[ec2][Elastic Compute Cloudの略。AWSにはいろいろなサービスがありますがEC2はいわゆるサーバのことです]
+//footnote[instance][AWSではサーバのことをインスタンスを呼びます]
+//footnote[startAws][本著の続編である「AWSをはじめよう」にはEC2でインスタンスを立てる手順が詳しく載っています]
+//footnote[750h][月に750時間まで無料とありますが24時間×31日で744時間なので要は1年間ずっと無料ということです]
 //footnote[cmanUrl3][@<href>{https://www.cman.jp/network/support/nslookup.html}]
 
 == nslookupはもう卒業！digコマンドの便利な使い方
 
 ドメイン名に紐づくIPアドレスを調べたいとき、あるいはIPアドレスに紐づくドメイン名を調べたいときはdigコマンド@<fn>{dig}を使用します。
 
-//footnote[dig][digはdomain information groperの略です。ちなみにGoogleに翻訳してもらったら「ドメイン情報痴漢」でした。gropeは手さぐりするという意味なので、ドメイン情報を手探りして調べてきてくれるということです。余談ですがpingのgも同じgroperなのでdigが痴漢ならpingも痴漢です。]
+//footnote[dig][digはdomain information groperの略です。ちなみにGoogleに翻訳してもらったら「ドメイン情報痴漢」でした。gropeは手さぐりするという意味なので、ドメイン情報を手探りして調べてきてくれるということです。余談ですがpingのgも同じgroperなのでdigが痴漢ならpingも痴漢です]
 
-たとえば本著を初めて頒布する技術書典4のウェブサイトは@<href>{https://techbookfest.org/event/tbf04}というURLです。このサイトがどこのウェブサーバに乗っているのか知りたかったらdigコマンドで引数に「techbookfest.org」というドメイン名を渡してやれば調べられます。早速digを叩いてみましょう。
+たとえば本著（改訂第2版）を頒布する技術書典7のウェブサイトは@<href>{https://techbookfest.org/event/tbf07}というURLです。このサイトがどこのウェブサーバに乗っているのか知りたかったらdigコマンドで引数に「techbookfest.org」というドメイン名を渡してやれば調べられます。早速digを叩いてみましょう。
 
 //cmd{
-$ @<b>{dig techbookfest.org}
+$ dig techbookfest.org
 
-; <<>> DiG 9.8.2rc1-RedHat-9.8.2-0.62.rc1.el6_9.5 <<>> techbookfest.org a
+; <<>> DiG 9.8.2rc1-RedHat-9.8.2-0.68.rc1.el6_10.3 <<>> techbookfest.org
 ;; global options: +cmd
 ;; Got answer:
-;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 48654
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 54916
 ;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 4, ADDITIONAL: 8
 
-@<b>{;; QUESTION SECTION:}
+;; QUESTION SECTION:
 ;techbookfest.org.              IN      A
 
-@<b>{;; ANSWER SECTION:}
+;; ANSWER SECTION:
+techbookfest.org.       300     IN      A       216.239.38.21
 techbookfest.org.       300     IN      A       216.239.32.21
 techbookfest.org.       300     IN      A       216.239.34.21
 techbookfest.org.       300     IN      A       216.239.36.21
-techbookfest.org.       300     IN      A       216.239.38.21
 
-@<b>{;; AUTHORITY SECTION:}
-techbookfest.org.       75009   IN      NS      ns-cloud-b1.googledomains.com.
-techbookfest.org.       75009   IN      NS      ns-cloud-b4.googledomains.com.
-techbookfest.org.       75009   IN      NS      ns-cloud-b2.googledomains.com.
-techbookfest.org.       75009   IN      NS      ns-cloud-b3.googledomains.com.
+;; AUTHORITY SECTION:
+techbookfest.org.       86400   IN      NS      ns-cloud-b4.googledomains.com.
+techbookfest.org.       86400   IN      NS      ns-cloud-b3.googledomains.com.
+techbookfest.org.       86400   IN      NS      ns-cloud-b2.googledomains.com.
+techbookfest.org.       86400   IN      NS      ns-cloud-b1.googledomains.com.
 
-@<b>{;; ADDITIONAL SECTION:}
-ns-cloud-b1.googledomains.com. 334209 IN A      216.239.32.107
-ns-cloud-b1.googledomains.com. 334209 IN AAAA   2001:4860:4802:32::6b
-ns-cloud-b2.googledomains.com. 334209 IN A      216.239.34.107
-ns-cloud-b2.googledomains.com. 334209 IN AAAA   2001:4860:4802:34::6b
-ns-cloud-b3.googledomains.com. 334209 IN A      216.239.36.107
-ns-cloud-b3.googledomains.com. 334209 IN AAAA   2001:4860:4802:36::6b
-ns-cloud-b4.googledomains.com. 334209 IN A      216.239.38.107
-ns-cloud-b4.googledomains.com. 334209 IN AAAA   2001:4860:4802:38::6b
+;; ADDITIONAL SECTION:
+ns-cloud-b1.googledomains.com. 345600 IN A      216.239.32.107
+ns-cloud-b1.googledomains.com. 345600 IN AAAA   2001:4860:4802:32::6b
+ns-cloud-b2.googledomains.com. 345600 IN A      216.239.34.107
+ns-cloud-b2.googledomains.com. 345600 IN AAAA   2001:4860:4802:34::6b
+ns-cloud-b3.googledomains.com. 345600 IN A      216.239.36.107
+ns-cloud-b3.googledomains.com. 345600 IN AAAA   2001:4860:4802:36::6b
+ns-cloud-b4.googledomains.com. 345600 IN A      216.239.38.107
+ns-cloud-b4.googledomains.com. 345600 IN AAAA   2001:4860:4802:38::6b
 
-;; Query time: 148 msec
+;; Query time: 260 msec
 ;; SERVER: 127.0.0.1#53(127.0.0.1)
-;; WHEN: Sun Mar 11 11:51:13 2018
+;; WHEN: Thu Aug 29 20:22:39 2019
 ;; MSG SIZE  rcvd: 395
 //}
 
 ただtechbookfest.orgに紐づくIPアドレスが知りたかっただけなのに、ものすごくいっぱい出てきました。
 
-digはまるでブキチ@<fn>{bukichi}のようなコマンドなのでちょっと聞いただけで「調べてきた結果を教えまし！まずキミの質問はこれでし！このドメイン名に紐づくIPアドレスはこれとこれとこれとこれなのでし！ちなみにIPアドレスを教えてくれたネームサーバの名前はこれでし、ネームサーバのIPアドレスはこっちなのでし！それからフルリゾルバは127.0.0.1で調査には148msecかかったのでし！」と調査の過程や付加情報まで含めて全部教えてくれます。
+digはまるでブキチ@<fn>{bukichi}のようなコマンドなのでちょっと聞いただけで「調べてきた結果を教えまし！まずキミの質問はこれでし！このドメイン名に紐づくIPアドレスはこれとこれとこれとこれなのでし！ちなみにIPアドレスを教えてくれたネームサーバの名前はこれでし、ネームサーバのIPアドレスはこっちなのでし！それからフルリゾルバは127.0.0.1で調査には260msecかかったのでし！」と調査の過程や付加情報まで含めて全部教えてくれます。
 
 //footnote[bukichi][スプラトゥーン2に出てくる武器屋の店主。ブキの話になると超早口で果てしなく解説するブキマニア。語尾が「でし！」でオタク感があふれていて素晴らしく可愛い。]
 
-有難いのですが情報は多くありすぎても混乱します。いいから簡潔に「techbookfest.orgに紐づくIPアドレス」だけを教えて！という場合は+shortというオプションを付けましょう。+shortさえつければdigはごく簡潔に答えてくれます。
+有難いのですが情報は多くありすぎても混乱します。「いいから簡潔にtechbookfest.orgに紐づくIPアドレスだけを教えて！」という場合は+shortというオプションを付けましょう。+shortさえつければdigはごく簡潔に答えてくれます。
 
 //cmd{
 $ dig techbookfest.org +short
@@ -128,8 +129,8 @@ Address: 216.239.34.21
 
 大昔はnslookupを叩くと「nslookupは非推奨だし、将来的には廃止されるから今後はdigやhostを使ってね@<fn>{nslookupIsDeprecated}」という警告メッセージが都度出ていたので、その頃を知っている人は「nslookupっていずれなくなるんでしょ？」という認識かと思いますが、実際はBIND@<fn>{bind}9.9.0a3が公開されたタイミングでnslookupからこの警告メッセージは消え、リリースノートには「nslookupを非推奨として扱うのはもうやめるね。非推奨の警告も消したよ@<fn>{noLongerDeprecated}」と書かれていますので、nslookupが非推奨だの廃止だのという話は一旦なくなったようです。
 
-//footnote[nslookupIsDeprecated][Note: nslookup is deprecated and may be removed from future releases. Consider using the `dig' or `host' programs instead.と表示されていました。]
-//footnote[bind][BINDはフルリゾルバとネームサーバ両方の機能を持つDNSサーバで、ISC（Internet Software Consortium）によって開発が行われています。多くのDNSサーバでBINDが採用されていますが「夏のBIND脆弱性祭り」などと揶揄されるほど脆弱性の注意喚起とそれに伴うアップデート推奨が多いため、最近はUnboundなど他のDNSサーバへの乗り換えもよく聞かれます。]
+//footnote[nslookupIsDeprecated][Note: nslookup is deprecated and may be removed from future releases. Consider using the `dig' or `host' programs instead.と表示されていました]
+//footnote[bind][BINDはフルリゾルバとネームサーバ両方の機能を持つDNSサーバで、ISC（Internet Software Consortium）によって開発が行われています。多くのDNSサーバでBINDが採用されていますが「夏のBIND脆弱性祭り」などと揶揄されるほど脆弱性の注意喚起とそれに伴うアップデート推奨が多いため、最近はUnboundなど他のDNSサーバへの乗り換えもよく聞かれます]
 //footnote[noLongerDeprecated][nslookup is no longer to be treated as deprecated. Remove "deprecated" warning message.]
 
 実際、何もトラブルが起きておらず、単純に名前解決した結果を知りたいだけであればhostやnslookupでも事足ります。ですがトラブル発生時の調査手段としてhostやnslookupを使おうとすると、必要な情報が不足していたり調べてきた結果を下手に加工して出力したりするため、どちらもあまり使いやすいコマンドとは言えません。これを機に今後はdigを使っていきましょう！
@@ -166,7 +167,7 @@ $ whois IPアドレス
 
 ==== 解答
 
-正解はBです。whoisコマンドを叩くと「Expires on」という項目に有効期限が表示されます。今回のtigerkyoro.jpであれば、次のようにwhoisコマンドを叩けば、ドメイン名の有効期限が2020/01/31であることが分かります。
+正解はBです。whoisコマンドを叩くと「Expires on」や「Registry Expiry Date」といった項目に有効期限が表示されます。今回のtigerkyoro.jpであれば、次のようにwhoisコマンドを叩けば、ドメイン名の有効期限が2020/01/31であることが分かります。
 
 //cmd{
 $ whois tigerkyoro.jp
@@ -202,7 +203,7 @@ Contact Information:
 [Fax]                           03-4589-3240
 //}
 
-但しjpドメイン名の場合、たとえば2019年末の時点で新人が更新費用を支払って更新の手続きを完了させたとしても、Whoisの「Expires on」の表示が変わるのは、いま表示されている有効期限（2020/01/31）の翌月1日（2020/02/01）になってからとなります。@<fn>{expiresOn}comやnetなどのドメイン名であれば、更新手続きを完了するとWhoisの有効期限はすぐに更新されます。
+但しjpドメイン名の場合、たとえば2019年末の時点で新人が更新費用を支払って更新の手続きを済ませたとしても、Whoisの「Expires on」の表示が変わるのは、いま表示されている有効期限（2020/01/31）の翌月1日（2020/02/01）になってからです。@<fn>{expiresOn}comやnetなどのドメイン名であれば、更新手続きを完了するとWhoisの有効期限の表示もすぐに更新されます。
 
 //footnote[expiresOn][JPドメインの更新費用を支払ったのですが　有効期限が更新されていません。 – さくらのサポート情報 @<href>{https://help.sakura.ad.jp/hc/ja/articles/206057382-JP%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E3%81%AE%E6%9B%B4%E6%96%B0%E8%B2%BB%E7%94%A8%E3%82%92%E6%94%AF%E6%89%95%E3%81%A3%E3%81%9F%E3%81%AE%E3%81%A7%E3%81%99%E3%81%8C-%E6%9C%89%E5%8A%B9%E6%9C%9F%E9%99%90%E3%81%8C%E6%9B%B4%E6%96%B0%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%81%BE%E3%81%9B%E3%82%93-}]
 
@@ -224,16 +225,16 @@ $ dig ドメイン名 a +short
 
 ==== 問題
 
-あなたは「mojimo-manga」（モジモマンガ）というサイト（@<href>{https://mojimo.jp/manga/}）の運用担当になりました。@<fn>{exampleSite}（@<img>{mojimoManga}）
+あなたはCIAOちゅ〜るの「ちゅ〜るメーカー」というサイト（@<href>{https://www.inaba-petfood.co.jp/ciao-chuuuuuuuuuuru/}）の運用担当になりました。@<fn>{exampleSite}（@<img>{chiaoChuru}）
 
 ところが前任者が急に辞めてしまって引継ぎ資料も見当たらず、このサイトがどこのウェブサーバで動いているのかちっとも分かりません。
 
-//footnote[exampleSite][もちろん例えです。本著及び著者は例えに使用させていただいたサイトと何の関係もありません。]
+//footnote[exampleSite][もちろん例えです。本著及び著者は例題に使用させていただいたサイトと何の関係もありません]
 
-//image[mojimoManga][mojimo-manga - あのマンガの、あのアニメの、あのフォントが使える！][scale=0.8]{
+//image[chiaoChuru][あなたのねこちゃんとちゅ〜るCMをつくろう！ | CIAOちゅ〜るメーカー][scale=0.8]{
 //}
 
-ウェブサーバはどこのクラウドサービスを使っているのでしょうか？
+ウェブサーバはどこのサービスを使っているのでしょうか？
 
  * A. さくらインターネット
  * B. AWS
@@ -243,35 +244,28 @@ $ dig ドメイン名 a +short
 
 ==== 解答
 
-正解はBです。
+正解はAです。
 
-先ず「dig ドメイン名 a +short」でドメイン名からIPを引いてみましょう。サイトのURLが@<href>{https://mojimo.jp/manga/}なので、確認すべきドメイン名はmojimo.jpです。
+先ず「dig ドメイン名 a +short」でドメイン名からIPを引いてみましょう。サイトのURLが@<href>{https://www.inaba-petfood.co.jp/ciao-chuuuuuuuuuuru/}なので、確認すべきドメイン名は@<code>{www.inaba-petfood.co.jp}です。
 
 //cmd{
-$ dig mojimo.jp a +short
-46.51.255.231
-54.248.233.139
+$ dig www.inaba-petfood.co.jp +short
+133.242.53.94
 //}
 
 IPアドレスは分かりましたが、IPだけではまだどこのクラウドサービスなのか分かりません。さらにwhoisコマンドでこのIPアドレスの持ち主を調べてみましょう。@<fn>{twoIp}
 
-「whois 46.51.255.231」を叩いてみると「descr: Amazon Web Services, Elastic Compute Cloud, EC2」と出ますので、このIPアドレスはAWSのEC2のものであることが分かります。これでmojimo-mangaのサイトがAWSのEC2上で動いていることが分かりました。
+@<code>{whois 133.242.53.94}を叩いてみると、Organizationに@<code>{SAKURA Internet Inc.}とありますので、このIPアドレスはさくらインターネットのものであることが分かります。これでCIAOちゅ〜るのサイトがさくらインターネットのサービス上で動いていることが分かりました。
 
-//footnote[twoIp][IPアドレスは2つありますがどちらでも構いません。]
+//footnote[twoIp][この例ではdigコマンドで出てきたIPが1つだけでしたが、複数出てきた場合はどちらでも構いません]
 
 //cmd{
-$ whois 46.51.255.231
+$ whois 133.242.53.94
 （中略）
-descr:          Amazon Web Services, Elastic Compute Cloud, EC2
-country:        JP
-admin-c:        ADSI2-RIPE
-tech-c:         ADSI2-RIPE
-status:         ASSIGNED PA
-mnt-by:         MNT-ADSI
-mnt-by:         NN20150720
-created:        2017-11-07T20:48:28Z
-last-modified:  2017-11-07T20:49:00Z
-source:         RIPE
+Network Information:            
+a. [Network Number]             133.242.53.0/24
+b. [Network Name]               SAKURA-NET
+g. [Organization]               SAKURA Internet Inc.
 （後略）
 //}
 
