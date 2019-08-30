@@ -305,7 +305,6 @@ TTLに300と書かれているので、最大で300秒＝5分待てばキャッ�
 
 「dig実行」を押したら、ちょっと下にスクロールして確認結果のANSWER SECTIONというところを見てください。次のように表示されていればネームサーバはちゃんとRoute53へ切り替わっています。数字やTLDは人によって異なるため、先ほどメモしておいたRoute53のネームサーバが表示されていることを確認してください。
 
-
 //cmd{
 ;; ANSWER SECTION:
 startdns.fun. 3600 IN NS ns-1072.awsdns-06.org.
@@ -331,6 +330,68 @@ MySQLのレプリケーションなどもそうですが、マスターがスレ
 ===[/column]
 
 //footnote[masterSlave][ちなみにMySQLのレプリケーションは、スレーブがマスターからデータをプルします]
+
+=== 使われるのは親と子どちらのNSレコードのTTL？
+
+ちなみに「ネームサーバがいつ切り替わるのかはNSレコードのTTLを見れば分かる」と前述しましたが、実はNSレコードは2箇所にあります。技術書典のウェブサイトで使われている@<code>{techbookfest.org}というドメイン名を例に、あなた自身がフルリゾルバになった気持ちでルートネームサーバから順を追って名前解決の流れをたどっていってみましょう。
+
+先ずはフルリゾルバになりきって、digコマンドでルートネームサーバに「techbookfest.orgのNSレコードを教えて」と話しかけてみましょう。もちろんルートネームサーバ自身は@<code>{techbookfest.org}のNSレコードは知らないので、答え（ANSWER SECTION）は返ってこず、代わりに「@<code>{org}については@<code>{a0.org.afilias-nst.info}（他5つ）というネームサーバに任せているよ」という委任先の情報（AUTHORITY SECTION）が返ってきます。@<fn>{digOption}これが1往復目です。
+
+//footnote[digOption][フルリゾルバになりきって名前解決がしたかったので非再帰的に問い合わせる「+norecurse」というオプションを、そして見やすくするためAUTHORITY SECTIONだけを表示したかったので「+noall +author」というオプションを付けています。またフルリゾルバではなく、ネームサーバに直接問い合わせたかったので@で対象のネームサーバを指定しています]
+
+//cmd{
+# dig +norecurse +noall +author techbookfest.org ns @a.root-servers.net
+org.                    172800  IN      NS      a0.org.afilias-nst.info.
+org.                    172800  IN      NS      a2.org.afilias-nst.info.
+org.                    172800  IN      NS      b0.org.afilias-nst.org.
+org.                    172800  IN      NS      b2.org.afilias-nst.org.
+org.                    172800  IN      NS      c0.org.afilias-nst.info.
+org.                    172800  IN      NS      d0.org.afilias-nst.org.
+//}
+
+ルートネームサーバから「@<code>{org}については@<code>{a0.org.afilias-nst.info}（他5つ）に任せている」という情報が得られたので、続けて@<code>{a0.org.afilias-nst.info}に「@<code>{techbookfest.org}のNSレコードを教えて」と話しかけてみましょう。するとやはり答え（ANSWER SECTION）は返ってこず、また代わりに「@<code>{techbookfest.org}については@<code>{ns-cloud-b1.googledomains.com}（他3つ）というネームサーバに任せているよ」という委任先の情報（AUTHORITY SECTION）が返ってきました。これが2往復目です。
+
+//cmd{
+$ dig +norecurse +noall +author techbookfest.org ns @a0.org.afilias-nst.info
+techbookfest.org.       86400   IN      NS      ns-cloud-b1.googledomains.com.
+techbookfest.org.       86400   IN      NS      ns-cloud-b4.googledomains.com.
+techbookfest.org.       86400   IN      NS      ns-cloud-b2.googledomains.com.
+techbookfest.org.       86400   IN      NS      ns-cloud-b3.googledomains.com.
+//}
+
+「@<code>{techbookfest.org}については@<code>{ns-cloud-b1.googledomains.com}（他3つ）に任せている」という情報が得られたので、3度目の正直で@<code>{ns-cloud-b1.googledomains.com}に「@<code>{techbookfest.org}のNSレコードを教えて」と話しかけてみましょう。するとようやく答え（ANSWER SECTION）が返ってきました。@<fn>{digOption2}これが3往復目です。
+
+//footnote[digOption2][今度はANSWER SECTIONだけを表示したかったので「+noall +answer」というオプションを付けています]
+
+//cmd{
+$ dig +norecurse +noall +answer techbookfest.org ns @ns-cloud-b1.googledomains.com
+techbookfest.org.       21600   IN      NS      ns-cloud-b1.googledomains.com.
+techbookfest.org.       21600   IN      NS      ns-cloud-b2.googledomains.com.
+techbookfest.org.       21600   IN      NS      ns-cloud-b3.googledomains.com.
+techbookfest.org.       21600   IN      NS      ns-cloud-b4.googledomains.com.
+//}
+
+2往復目と3往復目を並べて比較してみましょう。2往復目の@<code>{org}を任されている@<code>{a0.org.afilias-nst.info}を「親ネームサーバ」、3往復目の@<code>{techbookfest.org}を任されている@<code>{ns-cloud-b1.googledomains.com}を「子ネームサーバ」とした場合、親にも子にもNSレコードがあることが分かります。
+
+//cmd{
+$ dig +norec +noall +author techbookfest.org ns @a0.org.afilias-nst.info
+techbookfest.org.       86400   IN      NS      ns-cloud-b1.googledomains.com.
+techbookfest.org.       86400   IN      NS      ns-cloud-b4.googledomains.com.
+techbookfest.org.       86400   IN      NS      ns-cloud-b2.googledomains.com.
+techbookfest.org.       86400   IN      NS      ns-cloud-b3.googledomains.com.
+
+$ dig +norec +noall +answer techbookfest.org ns @ns-cloud-b1.googledomains.com
+techbookfest.org.       21600   IN      NS      ns-cloud-b1.googledomains.com.
+techbookfest.org.       21600   IN      NS      ns-cloud-b2.googledomains.com.
+techbookfest.org.       21600   IN      NS      ns-cloud-b3.googledomains.com.
+techbookfest.org.       21600   IN      NS      ns-cloud-b4.googledomains.com.
+//}
+
+親と子のNSレコードはどちらも同じ内容ですが、TTLだけが86400秒（1日）と21600秒（6時間）で異なります。このとき、@<code>{techbookfest.org}を任されている、つまり権威（AUTHORITY）を持っているのは子の方なので、フルリゾルバでのキャッシュ保持時間は子で指定されているTTLになる、と筆者は思っていました。
+
+しかし親切な読者の方から教えていただいたのですが、この挙動はフルリゾルバの実装に依存し、子のTTLに従うフルリゾルバの方が多いものの、OCNのように親のTTLに従うフルリゾルバも一部存在するのだそうです。@<fn>{qiita}
+
+//footnote[qiita][技術書典4で販売された「DNSをはじめよう」をフォローする感じの記事にしたい - Qiita @<href>{https://qiita.com/soushi/items/7432710308a78a684299}]
 
 === 【ドリル】ネームサーバを変えること≠レジストラを変えること
 
