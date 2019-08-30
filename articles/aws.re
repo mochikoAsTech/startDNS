@@ -328,9 +328,9 @@ startdns.fun. 3600 IN NS ns-943.awsdns-53.net.
 
 MySQLのレプリケーションなどもそうですが、マスターがスレーブにデータをプッシュしにいくのか、スレーブがマスターからデータをプルしてくるのか、つまり「何を契機にどっちが渡しに（もしくは取りに）動くのか？」を理解しておくのは大切なことです。@<fn>{masterSlave}
 
-//footnote[masterSlave][ちなみにMySQLのレプリケーションは、スレーブがマスターからデータをプルします]
-
 ===[/column]
+
+//footnote[masterSlave][ちなみにMySQLのレプリケーションは、スレーブがマスターからデータをプルします]
 
 === 【ドリル】ネームサーバを変えること≠レジストラを変えること
 
@@ -356,13 +356,13 @@ Route53のRegistered domainsというメニューからドメイン名を購入�
 //image[startAWS][再び自分のドメインのネームサーバを調べる][scale=0.6]{
 //}
 
-//footnote[howToBuy][@<href>{https://mochikoastech.booth.pm/}]
 
 ちなみにBOOTHはピクシブ株式会社@<fn>{pixiv}が運営している同人誌の通販及びダウンロード販売サイトで、書籍版を購入すると1～2営業日以内に本がBOOTH倉庫からネコポスで送られてきます。PDF版なら購入後すぐにダウンロードして読むことができます。技術書典で頒布されている同人誌の多くはBOOTHでも購入できますので、気になる方は「技術書典」のタグで検索@<fn>{techBookFest}してみることをお勧めします。
-
-//footnote[pixiv][イラストを投稿できるSNS、pixivでお馴染み。@<href>{https://www.pixiv.net/}]
-//footnote[techBookFest][@<href>{https://booth.pm/ja/search/技術書典}]
 
 「AWSをはじめよう」はAmazonのKindleでも販売していますが、そちらはPDFを一度画像に変換しており本文の検索ができないため、BOOTHのPDF版の方がお勧めです。
 
 ===[/column]
+
+//footnote[howToBuy][@<href>{https://mochikoastech.booth.pm/}]
+//footnote[pixiv][イラストを投稿できるSNS、pixivでお馴染み。@<href>{https://www.pixiv.net/}]
+//footnote[techBookFest][@<href>{https://booth.pm/ja/search/技術書典}]
