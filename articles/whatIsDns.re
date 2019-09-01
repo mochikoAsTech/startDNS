@@ -107,3 +107,70 @@ CNAME	このドメインの別名でリソースレコードの参照先
 //}
 
 それぞれのリソースレコードをどういうときに使うのか？については@<chapref>{aws}や@<chapref>{dig}で具体例を見て、手を動かしながら確認していきましょう。
+
+== hostsファイル
+
+DNSという管理権限が分散された仕組みが生まれる以前は、hostsファイル@<fn>{hosts}と呼ばれるテキストファイルに「名前とIPアドレスの対応」がすべて詰め込まれて一元管理されていました。hostsファイルは現在も使われており、実は名前解決は「先ずはhostsファイルで探す→hostsファイルになければフルリゾルバに問い合わせ」という順番で行われることが多い@<fn>{nsswitch}です。
+
+//footnote[hosts][ホスツファイルと読みます。ホスト名（サーバの名前）とIPアドレスの対応がたくさん記述されているのでhostの複数形でhostsです]
+//footnote[nsswitch][Linuxサーバの場合、名前解決の順番は@<code>{/etc/nsswitch.conf}のhost行で@<code>{hosts: files dns}のように指定されています。filesはhostsファイルのこと、dnsはDNSに問い合わせることを表しています]
+
+それでは実際にhostsファイルの利用を試してみましょう。
+
+=== Windowsでhostsを使ってみよう
+
+「メモ帳」で検索したらアイコンを右クリックして「管理者として実行」をクリック（@<img>{startDNS5}）します。
+
+//image[startDNS5][メモ帳を管理者として実行][scale=0.8]{
+//}
+
+メモ帳が開いたら「ファイル＞開く」で@<code>{C:\Windows\System32\drivers\etc}というフォルダの中にある@<code>{hosts}というファイルを開いてください。（@<img>{startDNS6}）フォルダ内にファイルが見当たらない場合は、右下の「テキスト文書 (*.txt)」を「すべてのファイル (*.*)」にします。
+
+//image[startDNS6][メモ帳でhostsファイルを開く][scale=0.8]{
+//}
+
+メモ帳でhostsファイルを開いたら、いちばん下に次の1行を書き足してみましょう。
+
+//cmd{
+150.95.255.38 we.love.caaaaaaaaaaaaaat
+//}
+
+猫への愛が爆発していますが、もちろんこんなドメイン名は実在しません。ctrl+sでhostsファイルの変更を保存したら、ブラウザで@<href>{http://we.love.caaaaaaaaaaaaaat/}を開いてみましょう。（@<img>{startDNS7}）「このドメインは、お名前.comで取得されています。」というページが表示されました。
+
+//image[startDNS7][存在しないドメイン名でページが表示された][scale=0.8]{
+//}
+
+これは@<code>{we.love.caaaaaaaaaaaaaat}という架空の名前と、お名前.comのウェブサーバ（@<code>{150.95.255.38}）のIPアドレスをhostsファイルで紐付けたことで、ページが表示されるようになったという仕組みです。@<fn>{excuse}もちろんこのURLを叩いても、hostsファイルに@<code>{150.95.255.38 we.love.caaaaaaaaaaaaaat}を書き足したパソコンでしかページは表示されません。
+
+//footnote[excuse][@<code>{$ dig we.love.caaaaaaaaaaaaaat @dns1.onamae.com +short +norec}で@<code>{150.95.255.38}を返してくれるネームサーバすごいなという気持ち。お名前.comさん、勝手に実験してすみません]
+
+このようにhostsファイルに書き込むことで、その環境でだけドメイン名に紐付くIPアドレスを変えられるので、サイトリニューアルでウェブサーバを引っ越すような場合に「hostsファイルにこれを書くとブラウザで新しいサイトが確認できる」のような使い方ができます。
+
+=== MacやLinuxでhostsを使ってみよう
+
+MacやLinuxで同じことを試したかったら、@<code>{/etc/hosts}というファイルのいちばん下に次の1行を書き足してみましょう。
+
+//cmd{
+150.95.255.38 we.love.caaaaaaaaaaaaaat
+//}
+
+その上で、ブラウザで@<href>{http://we.love.caaaaaaaaaaaaaat/}を開くか、ターミナルで次のcurlコマンドを叩くと動作確認ができます。@<fn>{defaultHost}
+
+//cmd{
+$ curl http://we.love.caaaaaaaaaaaaaat/
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<title>we.love.caaaaaaaaaaaaaat – このドメインはお名前.comで取得されています。</title>
+<link href="http://error.gmo.jp/contents/setstyle.css"
+ rel="stylesheet" type="text/css" />
+</head>
+（後略）
+//}
+
+//footnote[defaultHost][これはお名前.comのウェブサーバ（@<code>{150.95.255.38}）がどんなホスト名でリクエストが来てもレスポンスを返すようになっていたため、勝手な名前でリクエストしてもページが表示されています。hostsファイルを設定しただけでは、ウェブサーバ側の設定次第でページが返ってこない可能性も十分あります]
