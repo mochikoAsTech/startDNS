@@ -30,6 +30,7 @@ mochikoAsTech
 == Special Thanks:
 
  * 初めての本作りに奮闘する姿を見守ってくれた猫と旦那様と息子
+ * soushi @_so4
  * きゃすね @casnail
 
 === レビュアー
@@ -39,8 +40,13 @@ mochikoAsTech
 
 === 参考書籍
 
- * [ワンストップ！ 技術同人誌を書こう - 親方@oyakata2438](https://oyakata.booth.pm/items/708196)
- * [技術書をかこう！ ～はじめてのRe:VIEW～ 改訂版 - Techbooster](https://techbooster.booth.pm/items/586727)
- * [プロフェッショナルIPv6 - 小川 晃通](https://www.lambdanote.com/products/ipv6)
- * [DNSがよくわかる教科書 - 株式会社日本レジストリサービス(JPRS)](https://www.amazon.co.jp/dp/B07KQSRZ1S/)
- * [DNSDNS Resolution - Cryptic Command](https://cryptic-command.booth.pm/items/1317266)
+ * ワンストップ！ 技術同人誌を書こう - 親方@oyakata2438
+ ** @<href>{https://oyakata.booth.pm/items/708196}
+ * 技術書をかこう！ ～はじめてのRe:VIEW～ 改訂版 - Techbooster
+ ** @<href>{https://techbooster.booth.pm/items/586727}
+ * プロフェッショナルIPv6 - 小川 晃通
+ ** @<href>{https://www.lambdanote.com/products/ipv6}
+ * DNSがよくわかる教科書 - 株式会社日本レジストリサービス(JPRS)
+ ** @<href>{https://www.amazon.co.jp/dp/B07KQSRZ1S/}
+ * DNSDNS Resolution - Cryptic Command
+ ** @<href>{https://cryptic-command.booth.pm/items/1317266}
