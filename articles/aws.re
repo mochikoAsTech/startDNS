@@ -374,13 +374,13 @@ techbookfest.org.       21600   IN      NS      ns-cloud-b4.googledomains.com.
 2往復目と3往復目を並べて比較してみましょう。2往復目の@<code>{org}を任されている@<code>{a0.org.afilias-nst.info}を「親ネームサーバ」、3往復目の@<code>{techbookfest.org}を任されている@<code>{ns-cloud-b1.googledomains.com}を「子ネームサーバ」とした場合、親にも子にもNSレコードがあることが分かります。
 
 //cmd{
-$ dig +norec +noall +author techbookfest.org ns @a0.org.afilias-nst.info
+$ dig +norecurse +noall +author techbookfest.org ns @a0.org.afilias-nst.info
 techbookfest.org.       86400   IN      NS      ns-cloud-b1.googledomains.com.
 techbookfest.org.       86400   IN      NS      ns-cloud-b4.googledomains.com.
 techbookfest.org.       86400   IN      NS      ns-cloud-b2.googledomains.com.
 techbookfest.org.       86400   IN      NS      ns-cloud-b3.googledomains.com.
 
-$ dig +norec +noall +answer techbookfest.org ns @ns-cloud-b1.googledomains.com
+$ dig +norecurse +noall +answer techbookfest.org ns @ns-cloud-b1.googledomains.com
 techbookfest.org.       21600   IN      NS      ns-cloud-b1.googledomains.com.
 techbookfest.org.       21600   IN      NS      ns-cloud-b2.googledomains.com.
 techbookfest.org.       21600   IN      NS      ns-cloud-b3.googledomains.com.
