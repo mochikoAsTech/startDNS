@@ -11,11 +11,11 @@ AWSとはアマゾン ウェブ サービス（Amazon Web Services）の略で�
 
 アマゾンがやっているクラウドと言われても、そもそもクラウドってなんだろう？という方もいますよね。クラウドとは「ブラウザ上でスペックを選んでぽちぽちっとするだけで誰でもすぐにウェブサーバやDBサーバを立てたりネームサーバを使ったりできるサービス」@<fn>{cloud}のことです。AWSでは基本的に1秒単位の従量課金なので、たとえばサーバを立てて3分使ったら3分ぶんのお金しかかかりません。
 
-//footnote[cloud][AWSやクラウド、サーバについては本著の続編「AWSをはじめよう」で詳しく解説していますので、ここでは正確さよりも分かりやすさを優先したゆるい説明にしています。]
+//footnote[cloud][AWSやクラウド、サーバについては本著の続編「AWSをはじめよう」で詳しく解説していますので、ここでは正確さよりも分かりやすさを優先したゆるい説明にしています]
 
 今回はAWSの中でもRoute53（ルートフィフティースリー）というDNSのサービスを使用します。クラウドといえばGoogleのGoogle Cloud PlatformやMicrosoftのAzure（アジュール）、最近シェアを伸ばしてきたAlibaba Cloud、さくらインターネットのクラウドやGMOクラウドなどAWS以外にもたくさんあります。ですが現状のシェアトップはダントツでAWS@<fn>{cloudShare}です。AWSなら何か困って検索したときに出てくる情報も多いので、今回はAWSのRoute53でドメインのゾーンを作成します。
 
-//footnote[cloudShare][2018年時点、AWSはシェア全体の3割以上を占めクラウド界のトップを独走中です。]
+//footnote[cloudShare][2018年時点、AWSはシェア全体の3割以上を占めクラウド界のトップを独走中です]
 
 == AWSアカウント作成
 
@@ -26,7 +26,7 @@ AWSとはアマゾン ウェブ サービス（Amazon Web Services）の略で�
 
 なおAWSを初めて使用する場合、利用料が1年分無料@<fn>{awsFree}となります。
 
-//footnote[awsFree][無料利用枠の範囲が決まっており、何をどれだけ使っても無料という訳ではありませんので注意してください。たとえばこの後利用するRoute53というDNSのサービスは、1つのドメインにつき毎月50セントかかります。詳細は@<href>{https://aws.amazon.com/jp/free/}を確認してください。]
+//footnote[awsFree][無料利用枠の範囲が決まっており、何をどれだけ使っても無料という訳ではありませんので注意してください。たとえばこの後利用するRoute53というDNSのサービスは、1つのドメインにつき毎月50セントかかります。詳細は@<href>{https://aws.amazon.com/jp/free/}を確認してください]
 
 「AWS 無料」（@<img>{searchAwsFree}）で検索して上から2つめの「AWS クラウド無料利用枠 | AWS」@<fn>{awsFreeUrl}をクリックします。
 
@@ -100,7 +100,7 @@ AWSアカウントの作成画面（@<img>{signupAws}）で次の4つを入力�
 
 「コンソールにサインインする」を押す@<fn>{console}と、マネジメントコンソールへのログイン画面が表示されます。（@<img>{signInMailAddress}）先ほど登録したAWSアカウントのEメールアドレスを入力して「次へ」を押してください。
 
-//footnote[console][後でまたマネジメントコンソールにログインしたくなったら@<href>{https://aws.amazon.com/}で「コンソールへサインイン」を押せばログイン画面が表示されます。]
+//footnote[console][後でまたマネジメントコンソールにログインしたくなったら@<href>{https://aws.amazon.com/}で「コンソールへサインイン」を押せばログイン画面が表示されます]
 
 //image[signInMailAddress][AWSのアカウントのEメールアドレスを入力][scale=0.8]{
 //}
@@ -123,7 +123,7 @@ AWSアカウントの作成画面（@<img>{signupAws}）で次の4つを入力�
 
 AWSのマネジメントコンソールで、左上の「サービス」を押すとAWSのサービス一覧（@<img>{serviceRoute53}）が表示されます。@<fn>{classmethod}「ネットワーキング ＆ コンテンツ配信」というグループにあるRoute53を選択してください。
 
-//footnote[classmethod][クラスメソッドのDevelopers.IOで2018年時点のAWS全サービスがまとめられているので、AWS全体をざっと俯瞰したい方はそちらがお勧めです。@<href>{https://dev.classmethod.jp/cloud/aws/aws-summary-2018-1/}]
+//footnote[classmethod][クラスメソッドのDevelopers.IOで2019年時点のAWS全サービスがまとめられているので、AWS全体をざっと俯瞰したい方はそちらがお勧めです。@<href>{https://dev.classmethod.jp/cloud/aws/aws-summary-2019-1/}]
 
 //image[serviceRoute53][サービス一覧からRoute53を選択][scale=0.8]{
 //}
@@ -176,7 +176,7 @@ Type	Public Hosted Zone
 
 このサイトでは自分のドメイン名のネームサーバが何になっているのか、今の状態を確認できます。では「nslookup(dig)テスト【DNSサーバ接続確認】」のページ（@<img>{digStartDnsFunByCman}）で「ホスト名(FQDN)を指定してください」という欄に自分のドメインを入力（@<table>{digByCman}）して、オプションで「NS：正式なネームサーバ@<fn>{nameServer}」を選択したら「dig実行」を押してください。
 
-//footnote[nameServer][NSレコードはドメイン名のゾーンを管理するネームサーバを示すリソースレコードです。]
+//footnote[nameServer][NSレコードはドメイン名のゾーンを管理するネームサーバを示すリソースレコードです]
 
 //table[digByCman][ネームサーバを調べる際の入力項目]{
 項目	入力するもの
@@ -221,7 +221,7 @@ ANSWER SECTIONは名前のとおり「startdns.funのNSレコードは？」と�
  * ns-1072.awsdns-06.org.
  * ns-177.awsdns-22.com.
 
-//footnote[route53NameServer][数字やTLDは人によって異なります。あなたのドメインのNSレコードをメモしてください。]
+//footnote[route53NameServer][数字やTLDは人によって異なります。あなたのドメインのNSレコードをメモしてください]
 
 //image[nsRecord2][NSレコードのValueに書かれたネームサーバをメモしておく][scale=0.8]{
 //}
@@ -237,14 +237,14 @@ ANSWER SECTIONは名前のとおり「startdns.funのNSレコードは？」と�
 
 ログイン画面（@<img>{domainNaviLogin}）が表示されたら、ドメイン名を買ったときに発行されたお名前ID@<fn>{forgetOnamaeId}とパスワードを入力し、「ログイン」を押して管理画面のドメインNaviにログインします。
 
-//footnote[forgetOnamaeId][もしお名前IDを忘れてしまったら、ドメイン登録したときに届くメールに記載されています。]
+//footnote[forgetOnamaeId][もしお名前IDを忘れてしまったら、ドメイン登録したときに届くメールに記載されています]
 
 //image[domainNaviLogin][お名前IDとパスワードを入れてドメインNaviにログイン][scale=0.8]{
 //}
 
 ログインするとドメインNaviのトップページではなく「ドメイン契約更新」の画面（@<img>{continueContract}）が表示されます。@<fn>{abTestAgain}
 
-//footnote[abTestAgain][ABテストの影響でログインするお名前IDによってドメインNaviの見た目が異なるかもしれません。見た目に関わらず管理画面でやりたいことは同じで「ドメインのネームサーバを、デフォルトのお名前.comからRoute53に変更したい」だけです。]
+//footnote[abTestAgain][ABテストの影響でログインするお名前IDによってドメインNaviの見た目が異なるかもしれません。見た目に関わらず管理画面でやりたいことは同じで「ドメインのネームサーバを、デフォルトのお名前.comからRoute53に変更したい」だけです]
 
 //image[continueContract][ドメインNavi ドメイン契約更新][scale=0.8]{
 //}
