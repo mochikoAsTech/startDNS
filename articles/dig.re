@@ -269,16 +269,6 @@ g. [Organization]               SAKURA Internet Inc.
 （後略）
 //}
 
-===[column] 【コラム】digのオプションは略せる
-
-digコマンドには「+short」や「+norecurse」のようなクエリオプションがありますが、それぞれ後ろの何文字かを省略して「+shor」や「+norec」でも実行可能です。
-
-このような「コマンドオプションって略せるの？！」といったdigの細かい仕様や仕組みをもっと詳しく知りたい！という方は、JPRSが公開している「初心者のためのDNS運用入門 - トラブル事例とその解決のポイント -」@<fn>{dnsBeginner}という資料がお勧めです。
-
-===[/column]
-
-//footnote[dnsBeginner][@<href>{https://dnsops.jp/event/20140626/dns-beginners-guide2014-mizuno.pdf}]
-
 ===[column] 【コラム】同じドメイン名でAレコードを複数作るとどうなる？
 
 たとえばウェブサーバが2台あった場合、次のようにまったく同じドメイン名でIPアドレスが異なるAレコードを複数作ることができます。
@@ -459,6 +449,16 @@ Whoisで調べてみると、このように@<code>{test.co.jp}というドメ�
 //footnote[rfc2606][RFC2606で定められているexample.comやexample.net、もしくはJPRSが定めているexample.jpやexample.co.jpなどを使いましょう。@<href>{https://jprs.jp/faq/use/}]
 
 これらのドメイン名であれば将来的に誰かのものになる可能性もありませんし、リソースレコードはMXレコードもAレコードも設定されていないため、予期せぬ第三者へうっかりメールが飛んでいってしまうことも避けられます。
+
+===[column] 【コラム】digのオプションは略せる
+
+digコマンドには「+short」や「+norecurse」のようなクエリオプションがありますが、それぞれ後ろの何文字かを省略して「+shor」や「+norec」でも実行可能です。
+
+このような「コマンドオプションって略せるの？！」といったdigの細かい仕様や仕組みをもっと詳しく知りたい！という方は、JPRSが公開している「初心者のためのDNS運用入門 - トラブル事例とその解決のポイント -」@<fn>{dnsBeginner}という資料がお勧めです。
+
+===[/column]
+
+//footnote[dnsBeginner][@<href>{https://dnsops.jp/event/20140626/dns-beginners-guide2014-mizuno.pdf}]
 
 === NSレコード
 
