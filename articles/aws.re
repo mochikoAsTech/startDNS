@@ -148,7 +148,7 @@ Route53というネームサーバの中に自分のドメインのゾーンを�
 //image[createHostedZones][お名前.comで買った自分のドメインを書く][scale=0.8]{
 //}
 
-TypeはPublic Hosted Zoneを選択（@<table>{hostedZones}）します。「Public Hosted Zone」にしておけば外から「このドメイン名に紐づいてるIPはなに？」と聞かれたときにRoute53のネームサーバが「IPは〇〇だよ」と返事をします。ここを「Private Hosted Zone for Amazon VPC」にしてしまうとAWS内での名前解決しか出来なくなり、外から聞かれても何も答えてくれなくなってしまいますので、必ず「Public Hosted Zone」にしておいてください。入力完了したら「Create」を押します。
+TypeはPublic Hosted Zoneを選択（@<table>{hostedZones}）します。「Public Hosted Zone」にしておけば外から「このドメイン名に紐づいてるIPアドレスはなに？」と聞かれたときにRoute53のネームサーバが「IPアドレスは〇〇だよ」と返事をします。ここを「Private Hosted Zone for Amazon VPC」にしてしまうとAWS内での名前解決しか出来なくなり、外から聞かれても何も答えてくれなくなってしまいますので、必ず「Public Hosted Zone」にしておいてください。入力完了したら「Create」を押します。
 
 //table[hostedZones][ホストゾーン作成時の設定]{
 項目	入力するもの
@@ -196,9 +196,9 @@ startdns.fun.       300 IN NS   dns1.onamae.com.
 startdns.fun.       300 IN NS   dns2.onamae.com.
 //}
 
-ANSWER SECTIONは名前のとおり「startdns.funのNSレコードは？」という質問に対する答えです。NSレコードはそのドメインのゾーンを管理するネームサーバを示すリソースレコードなので「startdns.funというドメインのゾーンはお名前.comのネームサーバの中にあるよ」という答えが返ってきた、ということです。
+ANSWER SECTIONは名前のとおり「startdns.funのNSレコードは？」という質問に対する答えです。NSレコードはそのドメインのゾーンを管理するネームサーバを示すリソースレコードなので「startdns.funというドメイン名のネームサーバは、お名前.comのネームサーバ（@<code>{dns1.onamae.com}と@<code>{dns2.onamae.com}だよ」という答えが返ってきた、ということです。
 
-先ほどAWSのRoute53というネームサーバの中に自分のドメインのゾーンを作ったのに、なぜかドメインのネームサーバはまだお名前.comのままになっています。これはどういうことなのでしょう？
+先ほどAWSのRoute53というネームサーバの中に自分のドメイン名のゾーンを作ったのに、なぜかネームサーバはまだお名前.comのままになっています。これはどういうことなのでしょう？
 
 これはstartdns.funというゾーンがお名前.comのネームサーバに委任されていることで、次のような流れになっているからです。
 
@@ -212,7 +212,7 @@ ANSWER SECTIONは名前のとおり「startdns.funのNSレコードは？」と�
  * dns1.onamae.com.
  * dns2.onamae.com.
 
-そのためネームサーバをRoute53に変更したければ、Route53で自分のドメインのゾーンを用意するだけでなく、さらにお名前.comの管理画面で「ゾーンはお名前.comにある」という設定を「ゾーンはRoute53にある」という設定に書き換えなければいけなかったのです。
+そのためネームサーバをRoute53に変更したければ、Route53で自分のドメインのゾーンを用意するだけでなく、さらにお名前.comの管理画面で「このドメイン名はお名前.comのネームサーバを使う」という設定を「このドメイン名はRoute53のネームサーバを使う」という設定に書き換えなければいけなかったのです。
 
 先ほどのマネジメントコンソールに戻って（@<img>{nsRecord2}）NSレコードのValueを見てみましょう。次のような4つのネームサーバが表示されていると思います。@<fn>{route53NameServer}この4つは後ほど必要になりますのでパソコンのメモ帳に書き留めておいてください。
 
@@ -228,9 +228,7 @@ ANSWER SECTIONは名前のとおり「startdns.funのNSレコードは？」と�
 
 === ネームサーバをお名前.comからRoute53に変更
 
-それでは自分のドメイン名のネームサーバをRoute53に変更する設定を行いましょう。ブラウザの別タブでお名前.comのトップページ@<fn>{onamaeUrl}を開いて右上の「ドメインNavi ログイン」をクリックしてください。（@<img>{onamaeTopPageAgain}）
-
-//footnote[onamaeUrl][@<href>{https://www.onamae.com/}]
+それでは自分のドメイン名のネームサーバをRoute53に変更する設定を行いましょう。ブラウザの別タブでお名前.comのトップページを開いて右上の「ドメインNavi ログイン」をクリックしてください。（@<img>{onamaeTopPageAgain}）
 
 //image[onamaeTopPageAgain][右上の「ドメインNavi ログイン」をクリック][scale=0.8]{
 //}
