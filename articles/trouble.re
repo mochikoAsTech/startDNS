@@ -11,7 +11,7 @@
 
 「え、別にwwwあるかないかくらい些細なことじゃないの？何かだめなの？」と思われるかも知れませんが、これは意外と重要な問題です。
 
-そもそもドメイン名をwww.example.co.jpのように頭（この例だと第4レベルドメイン）から最後（トップレベルドメイン）までしっかり全部書いたものをFQDN@<fn>{fqdn}と呼びます。
+そもそもドメイン名を@<code>{www.example.co.jp}のように頭（この例だと第4レベルドメイン）から最後（トップレベルドメイン）までしっかり全部書いたものをFQDN@<fn>{fqdn}と呼びます。
 
  * www : 第4レベルドメイン
  * example : 第3レベルドメイン
@@ -69,7 +69,7 @@
 
 ドメイン名の管理がB社に移ったらお名前.comのネームサーバにあったリソースレコードをRoute53にコピーして、ドメインNavi（お名前.comの管理画面）でネームサーバをRoute53に変更します。仮にサイトリニューアルが5月15日だったとしたら、これらの作業は4月中に済ませておきましょう。この時点ではまだ移管前のウェブサーバを使っています。
 
-EC2上でリニューアル後のサイトが完成してテストも完了したら、5月15日にB社がRoute53でexample.netのAレコードの値を203.0.113.111から203.0.113.222に書き換えてやればサイト移管は完了です。
+EC2上でリニューアル後のサイトが完成してテストも完了したら、5月15日にB社がRoute53で@<code>{example.net}のAレコードの値を203.0.113.111から203.0.113.222に書き換えてやればサイト移管は完了です。
 
 このようにドメイン名の管理→ネームサーバ→ウェブサーバの順で移管することで、移管元のA社の負担が少なくなり、移管先であるB社が主体となって移管作業を進められるようになります。逆の順番（ウェブサーバ→ネームサーバ→ドメイン名の管理）で移管を進めようとすると、5月15日のAレコード書き換えもB社からA社に頼まなければならないし、お名前.comのネームサーバにあるリソースレコードの情報もいちいちA社がB社に渡してあげないといけません。
 
@@ -127,9 +127,9 @@ stg.example.net.    900     IN  A    203.0.113.222
 
 ですが、存在しないtest.example.netのAレコードをdigで引いたら「そんなレコードなかったよ」というキャッシュはフルリゾルバに残るのでしょうか？そして残るとしたらキャッシュ保持時間は何秒になるのでしょう？
 
-実際に自分のドメイン名で試してみましょう。筆者はstartdns.funを使いますので、あなたもお名前.comで買ったドメイン名を使って試してみてください。
+実際に自分のドメイン名で試してみましょう。筆者は@<code>{startdns.fun}を使いますので、あなたもお名前.comで買ったドメイン名を使って試してみてください。
 
-先ずはリソースレコードが存在しないtest.startdns.funをdigで引いてみましょう。statusが「そのドメイン名のリソースレコードは存在しない」という意味のNXDOMAINになって返ってきます。該当するレコードが存在しないためANSWER SECTIONは存在せず、代わりにドメイン名の管理情報を表すSOAレコードが付加情報として返ってきました。
+先ずはリソースレコードが存在しない@<code>{test.startdns.fun}をdigで引いてみましょう。statusが「そのドメイン名のリソースレコードは存在しない」という意味のNXDOMAINになって返ってきます。該当するレコードが存在しないためANSWER SECTIONは存在せず、代わりにドメイン名の管理情報を表すSOAレコードが付加情報として返ってきました。
 
 //cmd{
 $ dig test.startdns.fun a
@@ -155,14 +155,14 @@ startdns.fun.           900     IN      SOA
 
 このとき「そんなレコードは存在しない」というネガティブキャッシュがフルリゾルバに残ります。ネガティブキャッシュの保持時間はSOAレコードのTTL、もしくはSOAのMINUMUM（Negative cache TTL）の値のいずれか小さい方となります。
 
-今回のtest.startdns.funの場合、SOAレコードのTTLは900で、SOAのMININUMは86400ですので、ネガティブキャッシュの保持時間は900秒（15分）となります。ではネガティブキャッシュが残っている15分の間にRoute53でtest.startdns.funのAレコードを作ってみましょう。
+今回の@<code>{test.startdns.fun}の場合、SOAレコードのTTLは900で、SOAのMININUMは86400ですので、ネガティブキャッシュの保持時間は900秒（15分）となります。ではネガティブキャッシュが残っている15分の間にRoute53で@<code>{test.startdns.fun}のAレコードを作ってみましょう。
 
 @<href>{https://aws.amazon.com/} からマネジメントコンソールにログインしたら、左上の「サービス」を押してRoute53を選択します。Route53の画面（@<img>{dnsManagement}）を開いたら左メニューのHosted Zonesを選択します。
 
 //image[dnsManagement][左メニューのHosted Zonesを選択][scale=0.8]{
 //}
 
-表示されている自分のドメイン名（筆者ならstartdns.fun）を選択（@<img>{selectDomainName}）します。
+表示されている自分のドメイン名（筆者なら@<code>{startdns.fun}）を選択（@<img>{selectDomainName}）します。
 
 //image[selectDomainName][自分のドメイン名を選択][scale=0.8]{
 //}
@@ -181,12 +181,12 @@ Value	203.0.113.222
 //image[createRecordSet][NameとValueを記入したら「Create」を押す][scale=0.8]{
 //}
 
-これでtest.startdns.funのAレコードが出来上がりました。（@<img>{createdARecord}）
+これで@<code>{test.startdns.fun}のAレコードが出来上がりました。（@<img>{createdARecord}）
 
 //image[createdARecord][test.startdns.funのAレコードが出来た][scale=0.8]{
 //}
 
-それでは再度test.startdns.funをdigで引いてみましょう。今さっきAレコードを作ったので、今度は存在しているはずです。
+それでは再度@<code>{test.startdns.fun}をdigで引いてみましょう。今さっきAレコードを作ったので、今度は存在しているはずです。
 
 //cmd{
 $ dig test.startdns.fun a
@@ -254,7 +254,7 @@ startdns.fun.           172800  IN      NS      ns-943.awsdns-53.net.
 ;; Received 191 bytes from 205.251.198.69#53(205.251.198.69) in 99 ms
 //}
 
-+traceを付けたらちゃんと「test.startdns.funに紐づくIPアドレスは203.0.113.222です」という返答が返ってきました。でも+traceを付けて引いた結果はフルリゾルバのキャッシュを上書きしないため、+traceを消すとやはりNXDOMAINの状態に戻ります。ネガティブキャッシュの残り時間はあと334秒です。
++traceを付けたらちゃんと「@<code>{test.startdns.fun}に紐づくIPアドレスは203.0.113.222です」という返答が返ってきました。でも+traceを付けて引いた結果はフルリゾルバのキャッシュを上書きしないため、+traceを消すとやはりNXDOMAINの状態に戻ります。ネガティブキャッシュの残り時間はあと334秒です。
 
 //cmd{
 $ dig test.startdns.fun a
@@ -278,7 +278,7 @@ startdns.fun.           334     IN      SOA
 ;; MSG SIZE  rcvd: 119
 //}
 
-さらに5分ほど待ってようやくネガティブキャッシュの保持時間が過ぎたら、もう一度test.startdns.funをdigで引いてみましょう。statusはNXDOMAINからNOERRORに変わり、ANSWER SECTIONのところにRoute53で設定したAレコードが表示されました。
+さらに5分ほど待ってようやくネガティブキャッシュの保持時間が過ぎたら、もう一度@<code>{test.startdns.fun}をdigで引いてみましょう。statusはNXDOMAINからNOERRORに変わり、ANSWER SECTIONのところにRoute53で設定したAレコードが表示されました。
 
 //cmd{
 $ dig test.startdns.fun a
@@ -340,11 +340,11 @@ $ dig test.startdns.fun a +norecurse +short @ns-1605.awsdns-08.co.uk
 
 CAAレコードのCAAはCertification Authority Authorizationの略で、CAAレコードに「そのドメイン名の証明書を発行できる認証局」を書いておくことで、意図しない認証局による証明書の発行を防ぐ仕組みになっています。
 
-たとえば毎年DigiCertでstartdns.funのSSL証明書を発行をしており、それ以外の認証局に発行を依頼する予定はない、という場合はstartdns.funのCAAレコードでdigicert.comを指定しておくことで、DigiCert以外の認証局に対して証明書の発行依頼があっても認証局は証明書を発行せず、ドメイン管理者に「意図しない発行申請があったこと」を報告してくれます。
+たとえば毎年DigiCertで@<code>{startdns.fun}のSSL証明書を発行をしており、それ以外の認証局に発行を依頼する予定はない、という場合は@<code>{startdns.fun}のCAAレコードでdigicert.comを指定しておくことで、DigiCert以外の認証局に対して証明書の発行依頼があっても認証局は証明書を発行せず、ドメイン管理者に「意図しない発行申請があったこと」を報告してくれます。
 
 CAAレコードは必須ではありませんので、CAAレコードを設定していなければ従来通り証明書の発行に際してチェックや制限は一切行われません。ただしCAAレコードが見つからない場合の挙動には注意が必要です。
 
-たとえばwww.example.co.jpの証明書を取ろうとした場合、最初はwww.example.co.jpのCAAレコードがないか確認し、なければexample.co.jpのCAAレコードを確認、それもなければco.jpのCAAレコード、最終的にはjpのCAAレコードまでさかのぼって順に確認していきます。@<fn>{jprsCaa}
+たとえば@<code>{www.example.co.jp}の証明書を取ろうとした場合、最初は@<code>{www.example.co.jp}のCAAレコードがないか確認し、なければ@<code>{example.co.jp}のCAAレコードを確認、それもなければco.jpのCAAレコード、最終的にはjpのCAAレコードまでさかのぼって順に確認していきます。@<fn>{jprsCaa}
 
 //footnote[jprsCaa][ちなみにJPRSではco.jpやjpのCAAレコードは作成しておらず、当面作成する予定もないそうです]
 

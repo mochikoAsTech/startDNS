@@ -117,7 +117,7 @@ AWSアカウントの作成画面（@<img>{signupAws}）で次の4つを入力�
 
 == ドメイン名のネームサーバをRoute53に変更
 
-それではお名前.comで買ったドメイン名のネームサーバをRoute53に変更する作業を行いましょう。先ずはRoute53で自分のドメイン名のゾーンを作成します。筆者はstartdns.funというドメイン名を使いますので、あなたも自分のドメイン名のゾーンを作成してみてください。
+それではお名前.comで買ったドメイン名のネームサーバをRoute53に変更する作業を行いましょう。先ずはRoute53で自分のドメイン名のゾーンを作成します。筆者は@<code>{startdns.fun}というドメイン名を使いますので、あなたも自分のドメイン名のゾーンを作成してみてください。
 
 === Route53でホストゾーンを作成
 
@@ -143,7 +143,7 @@ Route53というネームサーバの中に自分のドメイン名のゾーン�
 //image[youHaveNoHostedZones][「You have no hosted zones」と表示されたら再び「Create Hosted Zone」を押す][scale=0.8]{
 //}
 
-ホストゾーンの作成画面（@<img>{createHostedZones}）を開いたらDomain Nameのところに先ほどお名前.comで買った自分のドメイン名を書きます。筆者はstartdns.funというドメイン名を買ったので、Domain Nameのところにstartdns.funと書きました。
+ホストゾーンの作成画面（@<img>{createHostedZones}）を開いたらDomain Nameのところに先ほどお名前.comで買った自分のドメイン名を書きます。筆者は@<code>{startdns.fun}というドメイン名を買ったので、Domain Nameのところに@<code>{startdns.fun}と書きました。
 
 //image[createHostedZones][お名前.comで買った自分のドメイン名を書く][scale=0.8]{
 //}
@@ -196,16 +196,16 @@ startdns.fun.       300 IN NS   dns1.onamae.com.
 startdns.fun.       300 IN NS   dns2.onamae.com.
 //}
 
-ANSWER SECTIONは名前のとおり「startdns.funのNSレコードは？」という質問に対する答えです。NSレコードはそのドメイン名のゾーンを管理するネームサーバを示すリソースレコードなので「startdns.funというドメイン名のネームサーバは、お名前.comのネームサーバ（@<code>{dns1.onamae.com}と@<code>{dns2.onamae.com}だよ」という答えが返ってきた、ということです。
+ANSWER SECTIONは名前のとおり「@<code>{startdns.fun}のNSレコードは？」という質問に対する答えです。NSレコードはそのドメイン名のゾーンを管理するネームサーバを示すリソースレコードなので「@<code>{startdns.fun}というドメイン名のネームサーバは、お名前.comのネームサーバ（@<code>{dns1.onamae.com}と@<code>{dns2.onamae.com}）だよ」という答えが返ってきた、ということです。
 
 先ほどAWSのRoute53というネームサーバの中に自分のドメイン名のゾーンを作ったのに、なぜかネームサーバはまだお名前.comのままになっています。これはどういうことなのでしょう？
 
-これはstartdns.funというゾーンがお名前.comのネームサーバに委任されていることで、次のような流れになっているからです。
+これは@<code>{startdns.fun}というゾーンがお名前.comのネームサーバに委任されていることで、次のような流れになっているからです。
 
 //image[whichOneIsMyNameServer][ゾーンがお名前.comのネームサーバに委任されている][scale=0.8]{
 //}
 
-このようにお名前.comのネームサーバとRoute53のネームサーバ、どちらにもstartdns.funのゾーンがあるのですが、上位ネームサーバのa.nic.funが「startdns.funについてはdns1.onamae.comに委任する」という設定なので、お名前.comのネームサーバがstartdns.funの権威を持った状態になっています。そのためstartdns.funのNSレコードを問い合わせたときに誰もRoute53のネームサーバには聞きに来ないのです。
+このようにお名前.comのネームサーバとRoute53のネームサーバ、どちらにも@<code>{startdns.fun}のゾーンがあるのですが、上位ネームサーバのa.nic.funが「@<code>{startdns.fun}については@<code>{dns1.onamae.com}に委任する」という設定なので、お名前.comのネームサーバが@<code>{startdns.fun}の権威を持った状態になっています。そのため@<code>{startdns.fun}のNSレコードを問い合わせたときに誰もRoute53のネームサーバには聞きに来ないのです。
 
 そもそもお名前.comでドメイン名を買うと、デフォルトの設定でネームサーバには次の2つが設定されています。
 
@@ -254,7 +254,7 @@ ANSWER SECTIONは名前のとおり「startdns.funのNSレコードは？」と�
 //image[contractRemind][ドメインNavi 更新アラート][scale=0.8]{
 //}
 
-ドメイン一覧（@<img>{domainNaviDomainList}）には自分が買ったドメイン名（筆者ならstartdns.fun）があります。買ったばかりのドメイン名はネームサーバが「初期設定」になっているので、そこをクリックして「ネームサーバー設定」の画面に進みます。
+ドメイン一覧（@<img>{domainNaviDomainList}）には自分が買ったドメイン名（筆者なら@<code>{startdns.fun}）があります。買ったばかりのドメイン名はネームサーバが「初期設定」になっているので、そこをクリックして「ネームサーバー設定」の画面に進みます。
 
 //image[domainNaviDomainList][ドメインNavi ドメイン一覧で「初期設定」を押す][scale=0.8]{
 //}

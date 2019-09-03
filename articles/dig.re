@@ -213,7 +213,7 @@ Contact Information:
 
 === Aレコード
 
-たとえば「www.example.jpは203.0.113.222」や「mx.example.comは203.0.113.22」のように、ドメイン名とIPアドレスを紐づけているのがAレコードです。あなたが「このサイトはどこにあるんだろう？」と思ったら、次のようにdigコマンドを叩いてみましょう。@<fn>{prompt}するとそのドメイン名に紐づくIPアドレスが表示されるはずです。
+たとえば「@<code>{www.example.jp}は203.0.113.222」や「@<code>{mx.example.com}は203.0.113.22」のように、ドメイン名とIPアドレスを紐づけているのがAレコードです。あなたが「このサイトはどこにあるんだろう？」と思ったら、次のようにdigコマンドを叩いてみましょう。@<fn>{prompt}するとそのドメイン名に紐づくIPアドレスが表示されるはずです。
 
 //cmd{
 $ dig ドメイン名 a +short
@@ -278,7 +278,7 @@ www.example.com.  300  IN  A  203.0.113.111
 www.example.com.  300  IN  A  203.0.113.222
 //}
 
-このようなAレコードを設定した状態で、digコマンドでwww.example.comのAレコードを問い合わせると、次のような応答が返ってきます。
+このようなAレコードを設定した状態で、digコマンドで@<code>{www.example.com}のAレコードを問い合わせると、次のような応答が返ってきます。
 
 //cmd{
 $ dig www.example.com a +short
@@ -347,7 +347,7 @@ MXレコードから察するに任天堂はOffice 365@<fn>{office365}を使っ�
 
 //footnote[rfc5321][@<href>{https://tools.ietf.org/html/rfc5321#section-5.1}]
 
-つまり「今回は@<href>{https://example.co.jp/}というサイトを公開したいだけで、メールを送受信する要件はまったくないのでexample.co.jpのMXレコードは設定しません」と思っていても、@<code>{example.co.jp}のAレコードさえあれば、そこに書かれたウェブサーバに対してメールが飛んできてしまう可能性があるのです。さらにPostfix@<fn>{postfix}はCentOSを最小限の構成でインストールしたときでも入っているので、全然意図していなかったけれどうっかりウェブサーバでPostfixが動いていて、エンドユーザから送られてきた個人情報満載なメールをひっそり受信していた！という可能性もあります。
+つまり「今回は@<href>{https://example.co.jp/}というサイトを公開したいだけで、メールを送受信する要件はまったくないので@<code>{example.co.jp}のMXレコードは設定しません」と思っていても、@<code>{example.co.jp}のAレコードさえあれば、そこに書かれたウェブサーバに対してメールが飛んできてしまう可能性があるのです。さらにPostfix@<fn>{postfix}はCentOSを最小限の構成でインストールしたときでも入っているので、全然意図していなかったけれどうっかりウェブサーバでPostfixが動いていて、エンドユーザから送られてきた個人情報満載なメールをひっそり受信していた！という可能性もあります。
 
 //footnote[postfix][メール転送エージェント。要はメールを受信したり送信したりするためのメールサーバ]
 
@@ -747,7 +747,7 @@ startdns.fun.   IN   CNAME    cdn.example.jp.
 
 しかもAliasレコードには「ZONE APEXでも使える」だけでなく、「CNAMEと違って名前解決が1回で済む」という利点があります。
 
-たとえばstartdns.funというドメイン名に紐づくIPアドレスを調べようとしたとき、CNAMEレコードの場合は「startdns.funのCNAMEレコードはcdn.example.jpで、cdn.example.jpのAレコードは203.0.113.222」のように名前解決が2回発生します。対してRoute53のAliasレコードで「startdns.funのエイリアス先はcdn.example.jpである」という設定をしておけば、フルリゾルバがstartdns.funのAレコードを問い合わせに来たら「startdns.funのAレコードは203.0.113.222」のように一発でIPアドレスを返すので名前解決は1回で済みます。
+たとえば@<code>{startdns.fun}というドメイン名に紐づくIPアドレスを調べようとしたとき、CNAMEレコードの場合は「@<code>{startdns.fun}のCNAMEレコードは@<code>{cdn.example.jp}で、@<code>{cdn.example.jp}のAレコードは203.0.113.222」のように名前解決が2回発生します。対してRoute53のAliasレコードで「@<code>{startdns.fun}のエイリアス先は@<code>{cdn.example.jp}である」という設定をしておけば、フルリゾルバが@<code>{startdns.fun}のAレコードを問い合わせに来たら「@<code>{startdns.fun}のAレコードは203.0.113.222」のように一発でIPアドレスを返すので名前解決は1回で済みます。
 
 ネームサーバでRoute53を使っていても、参照先のCDNやロードバランサーがAWS外なのであればCNAMEを使うしかありませんが、参照先がAWS内のサービスであればAliasレコードを使わない手はありません。ZONE APEXに限らず積極的に使いましょう。
 
@@ -755,25 +755,25 @@ startdns.fun.   IN   CNAME    cdn.example.jp.
 
 ところでドメイン名を買ったとき、お名前.comのネームサーバやRoute53を使う他に自力でネームサーバを立てて使うこともできます。Linuxサーバを立ててApacheをインストールすればウェブサーバになるように、Linuxサーバを立ててBINDをインストールすればもうそれは立派なネームサーバです。
 
-たとえば筆者がstartdns.funというドメイン名を買って、自分で作ったネームサーバにns1.startdns.funという名前を付け、startdns.funのNSレコードにns1.startdns.funを設定したとします。このとき、ブラウザで@<href>{http://startdns.fun/}を開こうとすると次のようになります。
+たとえば筆者が@<code>{startdns.fun}というドメイン名を買って、自分で作ったネームサーバに@<code>{ns1.startdns.fun}という名前を付け、@<code>{startdns.fun}のNSレコードに@<code>{ns1.startdns.fun}を設定したとします。このとき、ブラウザで@<href>{http://startdns.fun/}を開こうとすると次のようになります。
 
- 1. フルリゾルバにstartdns.funに紐づくIPアドレスを聞きに行く
- 1. フルリゾルバは自分の中にstartdns.funに紐づくIPアドレスのキャッシュがないことを確認
- 1. フルリゾルバはルートネームサーバにstartdns.funに紐づくIPアドレスを聞きに行く
+ 1. フルリゾルバに@<code>{startdns.fun}に紐づくIPアドレスを聞きに行く
+ 1. フルリゾルバは自分の中に@<code>{startdns.fun}に紐づくIPアドレスのキャッシュがないことを確認
+ 1. フルリゾルバはルートネームサーバに@<code>{startdns.fun}に紐づくIPアドレスを聞きに行く
  1. ルートネームサーバは「.funのネームサーバはa.nic.funだよ」と教えてくれる
- 1. フルリゾルバはa.nic.funにstartdns.funに紐づくIPアドレスを聞きに行く
- 1. a.nic.funは「startdns.funのネームサーバはns1.startdns.funだよ」と教えてくれる
- 1. フルリゾルバはルートネームサーバにns1.startdns.funに紐づくIPアドレスを聞きに行く
+ 1. フルリゾルバはa.nic.funに@<code>{startdns.fun}に紐づくIPアドレスを聞きに行く
+ 1. a.nic.funは「@<code>{startdns.fun}のネームサーバは@<code>{ns1.startdns.fun}だよ」と教えてくれる
+ 1. フルリゾルバはルートネームサーバにns1.@<code>{startdns.fun}に紐づくIPアドレスを聞きに行く
  1. ルートネームサーバは「.funのネームサーバはa.nic.funだよ」と教えてくれる
- 1. フルリゾルバはa.nic.funにns1.startdns.funに紐づくIPアドレスを聞きに行く
- 1. a.nic.funは「startdns.funのネームサーバはns1.startdns.funだよ」と教えてくれる
- 1. ns1.startdns.funのIPアドレスを知っているのがns1.startdns.funなのでフルリゾルバはいつまでもns1.startdns.funにたどり着けない
+ 1. フルリゾルバはa.nic.funにns1.@<code>{startdns.fun}に紐づくIPアドレスを聞きに行く
+ 1. a.nic.funは「@<code>{startdns.fun}のネームサーバは@<code>{ns1.startdns.fun}だよ」と教えてくれる
+ 1. @<code>{ns1.startdns.fun}のIPアドレスを知っているのが@<code>{ns1.startdns.fun}なのでフルリゾルバはいつまでも@<code>{ns1.startdns.fun}にたどり着けない
 
-「田中さんの住所は田中さんの家に行って田中さんに聞いて」みたいなもので、このままだといつまでもstartdns.funに紐づくIPアドレスが分かりません。
+「田中さんの住所は田中さんの家に行って田中さんに聞いて」みたいなもので、このままだといつまでも@<code>{startdns.fun}に紐づくIPアドレスが分かりません。
 
-これを解消するため、自分でネームサーバを立てるときは上位のネームサーバ（ここではa.nic.funのこと）に、ネームサーバのIPアドレスも一緒に登録しておかなければいけません。これを@<b>{グルーレコード}と呼びます。上位のa.nic.funからns1.startdns.funへの道をちゃんと繋げてくれるレコードだからglue（接着剤のこと）レコードなんですね。
+これを解消するため、自分でネームサーバを立てるときは上位のネームサーバ（ここではa.nic.funのこと）に、ネームサーバのIPアドレスも一緒に登録しておかなければいけません。これを@<b>{グルーレコード}と呼びます。上位のa.nic.funからns1.@<code>{startdns.fun}への道をちゃんと繋げてくれるレコードだからglue（接着剤のこと）レコードなんですね。
 
-お名前.comであればドメインNaviの中に「ネームサーバー名としてのホストを設定する」という設定画面がありますので、そこで自分が立てたネームサーバのドメイン名（ns1.startdns.fun）とそのIPアドレス（203.0.113.222）を登録すればOKです。これでいつまでもns1.startdns.funにたどり着けない無限ループが回避できるようになります。
+お名前.comであればドメインNaviの中に「ネームサーバー名としてのホストを設定する」という設定画面がありますので、そこで自分が立てたネームサーバのドメイン名（@<code>{ns1.startdns.fun}）とそのIPアドレス（203.0.113.222）を登録すればOKです。これでいつまでも@<code>{ns1.startdns.fun}にたどり着けない無限ループが回避できるようになります。
 
 ===[column] 【コラム】このIPアドレスはグローバルIP？プライベートIP？
 
