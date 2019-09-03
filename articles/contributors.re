@@ -9,7 +9,7 @@
  * @<href>{https://twitter.com/mochikoAsTech}
  * @<href>{https://mochikoastech.booth.pm/}
  * @<href>{https://note.mu/mochikoastech}
- * @<href>{https://mochikoastech.hatenablog.com}
+ * @<href>{https://mochikoastech.hatenablog.com/}
 
 ==== Hikaru Wakamatsu
 表紙デザインを担当。本著の名付け親。

@@ -205,21 +205,21 @@ ANSWER SECTIONは名前のとおり「@<code>{startdns.fun}のNSレコードは�
 //image[whichOneIsMyNameServer][ゾーンがお名前.comのネームサーバに委任されている][scale=0.8]{
 //}
 
-このようにお名前.comのネームサーバとRoute53のネームサーバ、どちらにも@<code>{startdns.fun}のゾーンがあるのですが、上位ネームサーバのa.nic.funが「@<code>{startdns.fun}については@<code>{dns1.onamae.com}に委任する」という設定なので、お名前.comのネームサーバが@<code>{startdns.fun}の権威を持った状態になっています。そのため@<code>{startdns.fun}のNSレコードを問い合わせたときに誰もRoute53のネームサーバには聞きに来ないのです。
+このようにお名前.comのネームサーバとRoute53のネームサーバ、どちらにも@<code>{startdns.fun}のゾーンがあるのですが、上位ネームサーバの@<code>{a.nic.fun}が「@<code>{startdns.fun}については@<code>{dns1.onamae.com}に委任する」という設定なので、お名前.comのネームサーバが@<code>{startdns.fun}の権威を持った状態になっています。そのため@<code>{startdns.fun}のNSレコードを問い合わせたときに誰もRoute53のネームサーバには聞きに来ないのです。
 
 そもそもお名前.comでドメイン名を買うと、デフォルトの設定でネームサーバには次の2つが設定されています。
 
- * dns1.onamae.com.
- * dns2.onamae.com.
+ * @<code>{dns1.onamae.com.}
+ * @<code>{dns2.onamae.com.}
 
 そのためネームサーバをRoute53に変更したければ、Route53で自分のドメイン名のゾーンを用意するだけでなく、さらにお名前.comの管理画面で「このドメイン名はお名前.comのネームサーバを使う」という設定を「このドメイン名はRoute53のネームサーバを使う」という設定に書き換えなければいけなかったのです。
 
 先ほどのマネジメントコンソールに戻って（@<img>{nsRecord2}）NSレコードのValueを見てみましょう。次のような4つのネームサーバが表示されていると思います。@<fn>{route53NameServer}この4つは後ほど必要になりますのでパソコンのメモ帳に書き留めておいてください。
 
- * ns-943.awsdns-53.net.
- * ns-1605.awsdns-08.co.uk.
- * ns-1072.awsdns-06.org.
- * ns-177.awsdns-22.com.
+ * @<code>{ns-943.awsdns-53.net.}
+ * @<code>{ns-1605.awsdns-08.co.uk.}
+ * @<code>{ns-1072.awsdns-06.org.}
+ * @<code>{ns-177.awsdns-22.com.}
 
 //footnote[route53NameServer][数字やTLDは人によって異なります。あなたのドメイン名のNSレコードをメモしてください]
 

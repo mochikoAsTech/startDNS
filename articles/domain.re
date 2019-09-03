@@ -194,7 +194,7 @@ Yahoo!ドメイン	取り扱いなし
 
 たとえば@<code>{example.co.jp}のTLDはjpですが、このjpというTLDは、日本の「株式会社日本レジストリサービス」（通称JPRS）がレジストリです。JPRSという社名を見聞きしたことはありますか？一時期は車内広告を出したりしていたのでもしかしたら見たことがあるかもしれません。
 
-それから、yahoo.comなどで使われているcomというTLDのレジストリは「VeriSign Global Registry Services」です。VeriSign Global Registry Servicesはcomだけでなくnetやnameなど複数のTLDを任されています。
+それから、@<code>{yahoo.com}などで使われているcomというTLDのレジストリは「VeriSign Global Registry Services」です。VeriSign Global Registry Servicesはcomだけでなくnetやnameなど複数のTLDを任されています。
 
 2020年の東京オリンピックに向けて販売に力を入れている.tokyoというTLD（@<img>{tokyo}）は、お名前.comと同じGMOグループに属しているGMOドメインレジストリ株式会社がレジストリです。
 
@@ -324,7 +324,7 @@ TLDが生まれてくる源泉となるレジストリは神のごとき存在�
  * 大阪府堺市南区
  * 京都府京都市南区
 
-のような住所と大変よく似ています。次の図（@<img>{startDNS2}）のように、先ほどのexampleやstartdnsと同様、中央区や南区と呼ばれるエリアは国内の複数箇所に存在していますが、都道府県からの住所を言えば一意に識別できます。
+のような住所と大変よく似ています。次の図（@<img>{startDNS2}）のように、先ほどの@<code>{example}や@<code>{startdns}と同様、中央区や南区と呼ばれるエリアは国内の複数箇所に存在していますが、都道府県からの住所を言えば一意に識別できます。
 
 //image[startDNS2][exampleと同じように中央区は複数箇所にあり、一意に識別するために住所がある][scale=0.8]{
 //}
@@ -333,23 +333,23 @@ TLDが生まれてくる源泉となるレジストリは神のごとき存在�
 
 このとき、jpというドメイン（領域）に内包されているドメインは、すべて「jpのサブドメイン」と呼ばれます。次の図（@<img>{startDNS4}）のとおり
 
- * startdns
- * example
- * co
- * （coの中の）example
+ * @<code>{startdns}
+ * @<code>{example}
+ * @<code>{co}
+ * （@<code>{co}の中の）@<code>{example}
 
-といったドメインはすべてjpのサブドメインです。さらにcoの中のexampleはcoというドメインにも含まれているので、「coのサブドメイン」でもあります。
+といったドメインはすべてjpのサブドメインです。さらに@<code>{co}の中の@<code>{example}は@<code>{co}というドメインにも含まれているので、「coのサブドメイン」でもあります。
 
 //image[startDNS4][exampleと同じように中央区は複数箇所にあり、一意に識別するために住所がある][scale=0.8]{
 //}
 
 それぞれのドメインを一意な名前、つまりドメイン名で呼んで説明すると次のようになります。
 
- * startdns.jpはjpのサブドメインである
- * example.jpはjpのサブドメインである
- * co.jpはjpのサブドメインである
- * example.co.jpはjpのサブドメインである
- * example.co.jpはco.jpのサブドメインである
+ * @<code>{startdns.jp}はjpのサブドメインである
+ * @<code>{example.jp}はjpのサブドメインである
+ * @<code>{co.jp}はjpのサブドメインである
+ * @<code>{example.co.jp}はjpのサブドメインである
+ * @<code>{example.co.jp}はco.jpのサブドメインである
 
 ちなみにドメイン名を買うと、サブドメインは作りたい放題です！サブドメインを作るたびに、ドメイン名を買ったときのような支払いは発生しません。
 
@@ -547,7 +547,7 @@ TLDが生まれてくる源泉となるレジストリは神のごとき存在�
 
  * A. 担当者である自分のメールアドレス
  * B. マーケティングチームのメーリングリスト
- * C. 個人情報流出が怖いので「test@example.com」のような適当なメールアドレス
+ * C. 個人情報流出が怖いので「@<code>{test@example.com}」のような適当なメールアドレス
 
 //raw[|latex|\begin{reviewimage}\begin{flushright}\includegraphics[width=0.5\maxwidth\]{./images/answerColumnShort.png}\end{flushright}\end{reviewimage}]
 
@@ -612,21 +612,21 @@ Whois検索はレジストリが提供しているサービスです。レジス
 
 //footnote[jprsWhois][@<href>{http://whois.jprs.jp/}]
 
-例として検索キーワードに日清カップヌードルの「cupnoodle.jp」を入れて検索（@<img>{cupnoodleWhois}）してみると、cupnoodle.jpのWhois情報が出てきます。登録者名を見れば「cupnoodle.jpというドメイン名の持ち主は日清食品株式会社なんだな」と分かりますし、登録年月日や有効期限を見れば「2001/03/26から使い始めて2020/03/31が次の更新タイミングなんだな」と分かります。
+例として検索キーワードに日清カップヌードルの「@<code>{cupnoodle.jp}」を入れて検索（@<img>{cupnoodleWhois}）してみると、@<code>{cupnoodle.jp}のWhois情報が出てきます。登録者名を見れば「@<code>{cupnoodle.jp}というドメイン名の持ち主は日清食品株式会社なんだな」と分かりますし、登録年月日や有効期限を見れば「2001/03/26から使い始めて2020/03/31が次の更新タイミングなんだな」と分かります。
 
 //image[cupnoodleWhois][cupnoodle.jpのWhois情報][scale=0.8]{
 //}
 
-このようにWhoisを使えばドメイン名から所有者を調べることが出来ます。それだけではなく逆に所有者名から所有しているドメイン名の一覧を調べることも出来ます。今度は検索タイプのプルダウンを「ドメイン名情報（登録者名）」にして、検索キーワードに「日清食品株式会社」と入れて検索（@<img>{nissinWhois}）してみましょう。DONBEI.JPやCHIKINRAMEN.JPなど日清食品が所有しているドメイン名の一覧が出てきました。
+このようにWhoisを使えばドメイン名から所有者を調べることが出来ます。それだけではなく逆に所有者名から所有しているドメイン名の一覧を調べることも出来ます。今度は検索タイプのプルダウンを「ドメイン名情報（登録者名）」にして、検索キーワードに「日清食品株式会社」と入れて検索（@<img>{nissinWhois}）してみましょう。@<code>{DONBEI.JP}や@<code>{CHIKINRAMEN.JP}など日清食品が所有しているドメイン名の一覧が出てきました。
 
 //image[nissinWhois][登録者名が日清食品株式会社のドメイン名][scale=0.8]{
 //}
 
 ===[column] 【コラム】ドメイン名は大文字小文字の区別をしない
 
-ところでJPRS WHOISのサイトで「cupnoodle.jp」を入れて検索（@<img>{cupnoodleWhois}）してみると、一番上のドメイン名がCUPNOODLE.JPのように大文字になっています。CUPNOODLE.JPではなく、cupnoodle.jpを検索したのになぜでしょうか？
+ところでJPRS WHOISのサイトで「@<code>{cupnoodle.jp}」を入れて検索（@<img>{cupnoodleWhois}）してみると、一番上のドメイン名が@<code>{CUPNOODLE.JP}のように大文字になっています。@<code>{CUPNOODLE.JP}ではなく、@<code>{cupnoodle.jp}を検索したのになぜでしょうか？
 
-実はドメイン名は大文字小文字の区別をしません。cupnoodle.jpもCUPNOODLE.JPもcUpNoOdLe.Jpもすべて同一のドメイン名です。
+実はドメイン名は大文字小文字の区別をしません。@<code>{cupnoodle.jp}も@<code>{CUPNOODLE.JP}も@<code>{cUpNoOdLe.Jp}もすべて同一のドメイン名です。
 
 ためしに大文字小文字混ぜこぜにした@<href>{https://WwW.cUpNoOdLe.Jp/}をブラウザで開いてみると、ちゃんとカップヌードルのサイトが見られます。特に最近はブラウザが勝手に大文字を小文字に置換してくれるので、たとえば商品パッケージや紙媒体で目立たせるためにURLのドメイン名の部分を全て大文字にしてもサイトには問題なくアクセスできます。
 
@@ -634,12 +634,12 @@ Whois検索はレジストリが提供しているサービスです。レジス
 
 === Whoisの項目はレジストリごとに微妙に違う
 
-ではプルダウンを「ドメイン名情報」に戻して今度は検索キーワードに「yahoo.com」を入れ、再びドメイン名から所有者名を調べてみましょう。（@<img>{dataNotFound}）
+ではプルダウンを「ドメイン名情報」に戻して今度は検索キーワードに「@<code>{yahoo.com}」を入れ、再びドメイン名から所有者名を調べてみましょう。（@<img>{dataNotFound}）
 
 //image[dataNotFound][yahoo.comを検索すると「該当するデータがありません。」と出る][scale=0.8]{
 //}
 
-yahoo.comの所有者を検索すると、なぜか「該当するデータがありません。」と出てきました。yahoo.comはちゃんと実在するドメイン名なのになぜでしょう？
+@<code>{yahoo.com}の所有者を検索すると、なぜか「該当するデータがありません。」と出てきました。@<code>{yahoo.com}はちゃんと実在するドメイン名なのになぜでしょう？
 
 なぜならば、このJPRS WHOISというサイトはJPRSが管理・提供している「.jpで終わるドメイン名のWhois情報が検索できるサイト」なので、comやnetといったjp以外のTLDは対象範囲外だからです。
 
@@ -656,7 +656,7 @@ net	VeriSign Global Registry Services	@<href>{https://www.verisign.com/ja_JP/dom
 shop	GMOドメインレジストリ	@<href>{http://whois.nic.shop/}
 //}
 
-Whoisを調べたいときTLDごとにサイトがばらばらなのは面倒だな、と思った方は、TLDに関わらずどのドメイン名でも調べられるaguse.jp（@<img>{aguse}）@<fn>{aguse}というサイトがおすすめです。ですがaguse.jpでは各レジストリのWhoisサイトほど詳しい情報は出てこないですし、更新されたWhois情報もすぐには反映されません。最新のWhois情報を全部正確に知りたい！というときは、やはり先ほどのようなレジストリのサイトか、この後@<chapref>{dig}で説明するWhoisコマンドを叩いて確認しましょう。
+Whoisを調べたいときTLDごとにサイトがばらばらなのは面倒だな、と思った方は、TLDに関わらずどのドメイン名でも調べられる@<code>{aguse.jp}（@<img>{aguse}）@<fn>{aguse}というサイトがおすすめです。ですがaguse.jpでは各レジストリのWhoisサイトほど詳しい情報は出てこないですし、更新されたWhois情報もすぐには反映されません。最新のWhois情報を全部正確に知りたい！というときは、やはり先ほどのようなレジストリのサイトか、この後@<chapref>{dig}で説明するWhoisコマンドを叩いて確認しましょう。
 
 //footnote[aguse][アグスジェーピー @<href>{https://www.aguse.jp/}]
 

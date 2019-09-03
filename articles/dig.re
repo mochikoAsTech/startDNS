@@ -38,7 +38,7 @@ whoisコマンドのインストール
 
 //footnote[dig][digはdomain information groperの略です。ちなみにGoogleに翻訳してもらったら「ドメイン情報痴漢」でした。gropeは手さぐりするという意味なので、ドメイン情報を手探りして調べてきてくれるということです。余談ですがpingのgも同じgroperなのでdigが痴漢ならpingも痴漢です]
 
-たとえば本著（改訂第2版）を頒布する技術書典7のウェブサイトは@<href>{https://techbookfest.org/event/tbf07}というURLです。このサイトがどこのウェブサーバに乗っているのか知りたかったらdigコマンドで引数に「techbookfest.org」というドメイン名を渡してやれば調べられます。早速digを叩いてみましょう。
+たとえば本著（改訂第2版）を頒布した技術書典7のウェブサイトは@<href>{https://techbookfest.org/event/tbf07}というURLです。このサイトがどこのウェブサーバに乗っているのか知りたかったらdigコマンドで引数に「techbookfest.org」というドメイン名を渡してやれば調べられます。早速digを叩いてみましょう。
 
 //cmd{
 $ dig techbookfest.org
@@ -80,13 +80,13 @@ ns-cloud-b4.googledomains.com. 345600 IN AAAA   2001:4860:4802:38::6b
 ;; MSG SIZE  rcvd: 395
 //}
 
-ただtechbookfest.orgに紐づくIPアドレスが知りたかっただけなのに、ものすごくいっぱい出てきました。
+ただ@<code>{techbookfest.org}に紐づくIPアドレスが知りたかっただけなのに、ものすごくいっぱい出てきました。
 
 digはまるでブキチ@<fn>{bukichi}のようなコマンドなのでちょっと聞いただけで「調べてきた結果を教えまし！まずキミの質問はこれでし！このドメイン名に紐づくIPアドレスはこれとこれとこれとこれなのでし！ちなみにIPアドレスを教えてくれたネームサーバの名前はこれでし、ネームサーバのIPアドレスはこっちなのでし！それからフルリゾルバは127.0.0.1で調査には260msecかかったのでし！」と調査の過程や付加情報まで含めて全部教えてくれます。
 
 //footnote[bukichi][スプラトゥーン2に出てくる武器屋の店主。ブキの話になると超早口で果てしなく解説するブキマニア。語尾が「でし！」でオタク感があふれていて素晴らしく可愛い]
 
-有難いのですが情報は多くありすぎても混乱します。「いいから簡潔にtechbookfest.orgに紐づくIPアドレスだけを教えて！」という場合は+shortというオプションを付けましょう。+shortさえつければdigはごく簡潔に答えてくれます。
+有難いのですが情報は多くありすぎても混乱します。「いいから簡潔に@<code>{techbookfest.org}に紐づくIPアドレスだけを教えて！」という場合は@<code>{+short}というオプションを付けましょう。@<code>{+short}さえつければdigはごく簡潔に答えてくれます。
 
 //cmd{
 $ dig techbookfest.org +short
@@ -160,8 +160,8 @@ $ whois IPアドレス
 
 //footnote[kyoro][@<href>{http://tigerkyoro.jp/}]
 
- * A. dig tigerkyoro.jp +short
- * B. whois tigerkyoro.jp
+ * A. @<code>{dig tigerkyoro.jp +short}
+ * B. @<code>{whois tigerkyoro.jp}
 
 //raw[|latex|\begin{reviewimage}\begin{flushright}\includegraphics[width=0.5\maxwidth\]{./images/answerColumnShort.png}\end{flushright}\end{reviewimage}]
 
@@ -246,7 +246,7 @@ $ dig ドメイン名 a +short
 
 正解はAです。
 
-先ず「dig ドメイン名 a +short」でドメイン名からIPを引いてみましょう。サイトのURLが@<href>{https://www.inaba-petfood.co.jp/ciao-chuuuuuuuuuuru/}なので、確認すべきドメイン名は@<code>{www.inaba-petfood.co.jp}です。
+先ず「@<code>{dig ドメイン名 a +short}」でドメイン名からIPを引いてみましょう。サイトのURLが@<href>{https://www.inaba-petfood.co.jp/ciao-chuuuuuuuuuuru/}なので、確認すべきドメイン名は@<code>{www.inaba-petfood.co.jp}です。
 
 //cmd{
 $ dig www.inaba-petfood.co.jp +short
@@ -316,20 +316,20 @@ www.example.com.  300  IN  A  203.0.113.222
 
 === MXレコード
 
-「〇〇@example.co.jp」というメールアドレス宛てにメールを送ったらこのメールサーバで受信します、という設定をしているのがMXレコードです。「このメールアドレスってメールはどこで受信してるんだっけ？」と思ったら、次のようにdigコマンドを叩いてみましょう。
+「@<code>{〇〇@example.co.jp}」というメールアドレス宛てにメールを送ったらこのメールサーバで受信します、という設定をしているのがMXレコードです。「このメールアドレスってメールはどこで受信してるんだっけ？」と思ったら、次のようにdigコマンドを叩いてみましょう。
 
 //cmd{
 $ dig ドメイン名 mx +short
 //}
 
-たとえば任天堂の問い合わせ窓口であるinfo@nintendo.co.jpにメールを送ったら、どこのメールサーバが受信するのか確認してみましょう。
+たとえば任天堂の問い合わせ窓口である@<code>{info@nintendo.co.jp}にメールを送ったら、どこのメールサーバが受信するのか確認してみましょう。
 
 //cmd{
 $ dig nintendo.co.jp mx +short
 10 nintendo-co-jp.mail.protection.outlook.com.
 //}
 
-「nintendo-co-jp.mail.protection.outlook.com」というのがメール受信サーバであることが分かりました。先頭の10はプリファレンス値といって「メールサーバが複数台ある場合の優先度」を表しています。MXレコードは複数設定できるため、プリファレンス値が10のメールサーバを複数台用意して負荷を分散したり、プリファレンス値が10のメールサーバが落ちていたら代わりにプリファレンス値が20のメールサーバで受信する、というように冗長性を高めたりできます。
+「@<code>{nintendo-co-jp.mail.protection.outlook.com}」というのがメール受信サーバであることが分かりました。先頭の10はプリファレンス値といって「メールサーバが複数台ある場合の優先度」を表しています。MXレコードは複数設定できるため、プリファレンス値が10のメールサーバを複数台用意して負荷を分散したり、プリファレンス値が10のメールサーバが落ちていたら代わりにプリファレンス値が20のメールサーバで受信する、というように冗長性を高めたりできます。
 
 MXレコードから察するに任天堂はOffice 365@<fn>{office365}を使っているようです。さらに@<code>{nintendo-co-jp.mail.protection.outlook.com}のAレコードを引くと、最終的にはメール受信サーバのIPアドレスまでたどり着くことができます。
 
@@ -374,7 +374,7 @@ example.co.jp.    IN  MX    0  .
 
 しかしいつまで経っても返事が来ません。Cさんがキャンペーン事務局にクレームの電話を入れてエンジニアのDさんが調査をした結果、送信元メールアドレスがA社ではなく@<code>{info@test.co.jp}になっていた問題が発覚しました。果たしてCさんが@<code>{info@test.co.jp}宛てに送ったメールはどこへ行ってしまったのでしょう？
 
-プロデューサーのあなたもエンジニアのDさんと一緒にこの問題を調査してみましょう。メール受信サーバを知りたいときは@<code>{dig ドメイン名 mx +short}です。
+プロデューサーのあなたもエンジニアのDさんと一緒にこの問題を調査してみましょう。メール受信サーバを知りたいときは「@<code>{dig ドメイン名 mx +short}」です。
 
 //cmd{
 $ dig test.co.jp mx +short
@@ -422,10 +422,10 @@ Whoisで調べてみると、このように@<code>{test.co.jp}というドメ�
 
 このように「自分の持ち物でないドメイン名」を勝手に使うのはトラブルの元です。
 
- * test.co.jp
- * test.com
- * aaa.com
- * xxx.com
+ * @<code>{test.co.jp}
+ * @<code>{test.com}
+ * @<code>{aaa.com}
+ * @<code>{xxx.com}
 
 などはいかにもサンプルっぽいので、なんとなく「田中一郎」や「山田太郎」のようなノリで使いたくなってしまいますが、これらのドメイン名にはいずれもちゃんと持ち主@<fn>{exampleDomain}がいます。
 
@@ -527,7 +527,7 @@ $ dig pdc.pokemon.jp txt +short
 "google-site-verification=Vg3Ar1_hRlrET3eyTiQS8ONtb_ijVAZh1ME3FaWX-Mw"
 //}
 
-@<code>{pdc.pokemon.jp}のTXTレコードは複数あるようですが、SPFレコードは1つめの@<code>{v=spf1}で始まる方です。includeは引数で渡しているドメイン名のSPFレコードを含むという意味ですので、さらに@<code>{spf.pdc.pokemon.jp}と@<code>{spf.pokemon.mailds.jp}のSPFレコードを引いてみましょう。
+@<code>{pdc.pokemon.jp}のTXTレコードは複数あるようですが、SPFレコードは1つめの@<code>{v=spf1}で始まる方です。@<code>{include}は引数で渡しているドメイン名のSPFレコードを含むという意味ですので、さらに@<code>{spf.pdc.pokemon.jp}と@<code>{spf.pokemon.mailds.jp}のSPFレコードを引いてみましょう。
 
 //cmd{
 $ dig spf.pdc.pokemon.jp txt +short
@@ -552,9 +552,9 @@ $ dig spf.pokemon.mailds.jp txt +short
 
 ところがB社の担当者から「問い合わせ受付メールが迷惑メール扱いされて迷惑メールボックスに入ってしまう。エンドユーザの方でも同じ現象が起きているようだ」というクレームが入りました。原因を調査するにはどのdigコマンドを叩くべきでしょうか？
 
- * A. dig example.com spf +short
- * B. dig campaign.example.com txt +short
- * C. dig example.com txt +short
+ * A. @<code>{dig example.com spf +short}
+ * B. @<code>{dig campaign.example.com txt +short}
+ * C. @<code>{dig example.com txt +short}
 
 //raw[|latex|\begin{reviewimage}\begin{flushright}\includegraphics[width=0.5\maxwidth\]{./images/answerColumnShort.png}\end{flushright}\end{reviewimage}]
 
@@ -619,7 +619,7 @@ cs1018.wpc.omicroncdn.net.
 152.195.38.205
 //}
 
-なぜaiboのサイト@<fn>{aibo}のAレコードを調べると@<code>{cs1018.wpc.omicroncdn.net}という全然関係のなさそうなドメイン名が出てくるのでしょう？+shortオプションを外して、この結果に至るまでの過程を見てみましょう。
+なぜaiboのサイト@<fn>{aibo}のAレコードを調べると@<code>{cs1018.wpc.omicroncdn.net}という全然関係のなさそうなドメイン名が出てくるのでしょう？@<code>{+short}オプションを外して、この結果に至るまでの過程を見てみましょう。
 
 //footnote[aibo][@<href>{https://aibo.sony.jp/}]
 
@@ -682,10 +682,10 @@ $ dig ドメイン名 cname +short
 //image[kidokid][キドキド（KID-O-KID）のサイト][scale=0.8]{
 //}
 
- * A. dig kidokid.bornelund.co.jp cname +short
- * B. dig kidokid.bornelund.co.jp a +short
- * C. dig kidokid.bornelund.co.jp txt +short
- * D. dig kidokid.bornelund.co.jp mx +short
+ * A. @<code>{dig kidokid.bornelund.co.jp cname +short}
+ * B. @<code>{dig kidokid.bornelund.co.jp a +short}
+ * C. @<code>{dig kidokid.bornelund.co.jp txt +short}
+ * D. @<code>{dig kidokid.bornelund.co.jp mx +short}
 
 //raw[|latex|\begin{reviewimage}\begin{flushright}\includegraphics[width=0.5\maxwidth\]{./images/answerColumnShort.png}\end{flushright}\end{reviewimage}]
 
@@ -760,18 +760,18 @@ startdns.fun.   IN   CNAME    cdn.example.jp.
  1. フルリゾルバに@<code>{startdns.fun}に紐づくIPアドレスを聞きに行く
  1. フルリゾルバは自分の中に@<code>{startdns.fun}に紐づくIPアドレスのキャッシュがないことを確認
  1. フルリゾルバはルートネームサーバに@<code>{startdns.fun}に紐づくIPアドレスを聞きに行く
- 1. ルートネームサーバは「.funのネームサーバはa.nic.funだよ」と教えてくれる
+ 1. ルートネームサーバは「.funのネームサーバは@<code>{a.nic.fun}だよ」と教えてくれる
  1. フルリゾルバはa.nic.funに@<code>{startdns.fun}に紐づくIPアドレスを聞きに行く
  1. a.nic.funは「@<code>{startdns.fun}のネームサーバは@<code>{ns1.startdns.fun}だよ」と教えてくれる
  1. フルリゾルバはルートネームサーバにns1.@<code>{startdns.fun}に紐づくIPアドレスを聞きに行く
- 1. ルートネームサーバは「.funのネームサーバはa.nic.funだよ」と教えてくれる
+ 1. ルートネームサーバは「.funのネームサーバは@<code>{a.nic.fun}だよ」と教えてくれる
  1. フルリゾルバはa.nic.funにns1.@<code>{startdns.fun}に紐づくIPアドレスを聞きに行く
  1. a.nic.funは「@<code>{startdns.fun}のネームサーバは@<code>{ns1.startdns.fun}だよ」と教えてくれる
  1. @<code>{ns1.startdns.fun}のIPアドレスを知っているのが@<code>{ns1.startdns.fun}なのでフルリゾルバはいつまでも@<code>{ns1.startdns.fun}にたどり着けない
 
 「田中さんの住所は田中さんの家に行って田中さんに聞いて」みたいなもので、このままだといつまでも@<code>{startdns.fun}に紐づくIPアドレスが分かりません。
 
-これを解消するため、自分でネームサーバを立てるときは上位のネームサーバ（ここではa.nic.funのこと）に、ネームサーバのIPアドレスも一緒に登録しておかなければいけません。これを@<b>{グルーレコード}と呼びます。上位のa.nic.funからns1.@<code>{startdns.fun}への道をちゃんと繋げてくれるレコードだからglue（接着剤のこと）レコードなんですね。
+これを解消するため、自分でネームサーバを立てるときは上位のネームサーバ（ここでは@<code>{a.nic.fun}のこと）に、ネームサーバのIPアドレスも一緒に登録しておかなければいけません。これを@<b>{グルーレコード}と呼びます。上位の@<code>{a.nic.fun}からns1.@<code>{startdns.fun}への道をちゃんと繋げてくれるレコードだからglue（接着剤のこと）レコードなんですね。
 
 お名前.comであればドメインNaviの中に「ネームサーバー名としてのホストを設定する」という設定画面がありますので、そこで自分が立てたネームサーバのドメイン名（@<code>{ns1.startdns.fun}）とそのIPアドレス（203.0.113.222）を登録すればOKです。これでいつまでも@<code>{ns1.startdns.fun}にたどり着けない無限ループが回避できるようになります。
 

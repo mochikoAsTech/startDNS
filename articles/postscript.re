@@ -10,7 +10,7 @@
 
 本著がDNSが分からなくて困っている誰かの役に立てば、それ以上に嬉しいことはありません。
 
-数ある技術本の中から「DNSをはじめよう」を手に取ってくださったあなたに感謝します。
+数ある技術書の中から「DNSをはじめよう」を手に取ってくださったあなたに感謝します。
 
 //flushright{
 
@@ -20,16 +20,21 @@ mochikoAsTech
 
 //}
 
+//blankline
+//blankline
+//blankline
+//blankline
+
 == PDF版のダウンロード
 
 本著（紙の書籍）をお買い上げいただいた方は、下記のURLからPDF版を無料でダウンロードできます。
 
  * ダウンロードURL：@<href>{https://mochikoastech.booth.pm/items/813317}
- * パスワード：@<ttb>{******}
+ * パスワード：@<ttb>{AihaWagamamaSunshine0422}
 
 == Special Thanks:
 
- * 初めての本作りに奮闘する姿を見守ってくれた猫と旦那様と息子
+ * 前髪パッツンの黒猫と旦那様と息子に捧ぐ
  * soushi @_so4
  * きゃすね @casnail
 
@@ -38,7 +43,7 @@ mochikoAsTech
  * 深澤俊
  * Takeshi Matsuba
 
-=== 参考書籍
+=== 参考文献
 
  * ワンストップ！ 技術同人誌を書こう - 親方@oyakata2438
  ** @<href>{https://oyakata.booth.pm/items/708196}
