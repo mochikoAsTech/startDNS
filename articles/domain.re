@@ -300,16 +300,18 @@ TLDが生まれてくる源泉となるレジストリは神のごとき存在�
 
 たとえば
 
- * startdns.fun
- * example.co.jp
- * example.jp
- * example.com
+ * @<code>{startdns.fun}
+ * @<code>{example.co.jp}
+ * @<code>{example.jp}
+ * @<code>{example.com}
 
-というドメイン名があったとき、次の図（@<img>{startDNS3}）のように@<code>{example}（3箇所にある）や@<code>{co}や@<code>{jp}や@<code>{com}といった個々の名前空間@<fn>{nameSpace}の領域を「ドメイン」と呼びます。@<fn>{domain}それぞれのドメインを「.（ドット）」でつないで一意に識別する「@<code>{example.co.jp}」や「@<code>{example.com}」といった名前がドメイン名@<fn>{fqdn}です。@<fn>{dot}
+というドメイン名があったとき、次の図（@<img>{startDNS3}）のように@<code>{example}（3箇所にある）や@<code>{co}や@<code>{jp}や@<code>{com}といった個々の名前空間@<fn>{nameSpace}の領域を「ドメイン」と呼びます。@<fn>{domain}それぞれのドメインを一意に識別する「@<code>{example.co.jp}」や「@<code>{example.com}」といった名前がドメイン名@<fn>{fqdn}です。
+
+そして@<code>{www.example.co.jp}というドメイン名の場合、@<code>{www}と@<code>{example}と@<code>{co}と@<code>{jp}というそれぞれの文字列は「ラベル」と呼ばれ、ドメイン名はこのラベルを「.（ドット）」でつなぐ形で構成されています。@<fn>{dot}
 
 //footnote[nameSpace][名前空間とは、その中のものが一意な名前を持つ空間のことです。たとえばパソコンのデスクトップ上にある「会議資料」というフォルダ（名前空間）の直下には、「議事録.txt」という名前のファイルは1つだけで、同名のファイルをもう1つ作ることはできません。ですが、「会議資料」の中にさらに「全社総会」というフォルダを作ると、そこは別の名前空間なので「議事録.txt」というファイルを作ることはできます。PHPなどのプログラミング言語においても、名前空間は自分が作った関数とPHPの組み込みの関数の名前が衝突してしまうときの解決手段として存在しています]
 //footnote[domain][英語のドメイン（domain）を直訳すると「範囲」とか「領域」のことなので、「この領域をドメインと呼びます！」と言われても「この猫をキャットと呼びます！」という感じですごくアホっぽいのですが、そうとしか説明できなくて広い気持ちで許されたい]
-//footnote[fqdn][より正確に言うとexample.co.jpはFQDN（Fully Qualified Domain Name、日本語だと完全修飾ドメイン名）で、個々のexampleやcoやjpは相対ドメイン名です。「どこ行きたいの？」と問われたときに「大阪府大阪市中央区！」と言うのがFQDNで、大阪府大阪市に居る状態で「中央区！」と言うのが相対ドメイン名というイメージですね]
+//footnote[fqdn][より正確に言うとexample.co.jpはFQDN（Fully Qualified Domain Name、日本語だと完全修飾ドメイン名）で、個々のexampleやcoやjpやexample.coなどは相対ドメイン名です。「どこ行きたいの？」と問われたときに「大阪府大阪市中央区！」と言うのがFQDNで、大阪府大阪市に居る状態で「中央区！」と言ったり、大阪府に居る状態で「大阪市中央区！」と言ったりするのが相対ドメイン名というイメージですね]
 //footnote[dot][本当はドメイン名の末尾には「ルート」というドメインを表す.（ドット）があるのですが、省略されることが殆どです]
 
 //image[startDNS3][個々の名前空間がドメインで、識別するための一意な名前がドメイン名][scale=0.8]{
@@ -478,7 +480,7 @@ TLDが生まれてくる源泉となるレジストリは神のごとき存在�
 //image[contractRemind][ドメインNavi 更新アラート][scale=0.8]{
 //}
 
-ドメイン一覧（@<img>{domainNaviDomainList}）を開くと、今買ったばかりのドメイン名（筆者ならstartdns.fun）が表示されます。自分が買ったドメイン名をクリックしてください。
+ドメイン一覧（@<img>{domainNaviDomainList}）を開くと、今買ったばかりのドメイン名（筆者なら@<code>{startdns.fun}）が表示されます。自分が買ったドメイン名をクリックしてください。
 
 //image[domainNaviDomainList][ドメインNavi ドメイン一覧][scale=0.8]{
 //}
@@ -732,7 +734,7 @@ Whoisに情報を登録しなかったり嘘の情報を登録したりすると
 
 これはWhois上で表示される組織名や連絡先を代理でレジストラ（お名前.com）の情報にしてくれるサービスで、一般的にはプロキシサービスやプライバシーサービスと呼ばれています。Whois情報公開代行を使えば、Whoisの所有者の欄には自分の名前の代わりに「Whois Privacy Protection Service by onamae.com」と出るので個人情報を晒さなくて済みます。
 
-実際に筆者のstartdns.funのWhois情報を検索（@<img>{startdnsWhois}）してみると、持ち主の情報が「Whois Privacy Protection Service by onamae.com」になっていることが確認できました。あなたもレジストラのWhois情報検索サイトで、自分が買ったドメイン名のWhoisを確認してみてください。
+実際に筆者の@<code>{startdns.fun}のWhois情報を検索（@<img>{startdnsWhois}）してみると、持ち主の情報が「Whois Privacy Protection Service by onamae.com」になっていることが確認できました。あなたもレジストラのWhois情報検索サイトで、自分が買ったドメイン名のWhoisを確認してみてください。
 
 //image[startdnsWhois][startdns.funのWhois情報を見るとお名前.comになっている][scale=0.8]{
 //}
