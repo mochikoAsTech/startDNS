@@ -387,7 +387,7 @@ AWSのEC2でdigコマンドを叩いてみたところ、TTLを1000にしてい�
 
 事象発生当時のツイート（@<img>{loveliveTweet}）@<fn>{tweet}に貼られていたWhois情報などを見ると、B社は恐らくネットオウル株式会社が運営するスタードメインと思われます。攻撃者はスタードメインの管理画面から@<code>{lovelive-anime.jp}というドメイン名の移管を申請し、申請を受けたJPRSはA社に対してドメイン名の移管申請があったことを通知します。そしてA社からJPRSへ「ドメイン名の登録者（株式会社サンライズ）は移管を承認しない」という回答が10日以内@<fn>{10days}に行われなかったことで、JPRSが「承認する」という回答を得たものとみなし、その結果移管が行われてしまったものと推察されます。
 
-//image[loveliveTweet][不正に移管された際のWhois情報][scale=0.8]{
+//image[loveliveTweet][不正に移管された際のWhois情報][scale=0.6]{
 //}
 
 //footnote[tweet][@<href>{https://twitter.com/nsutngo/status/1113953668783456256}]

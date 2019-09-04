@@ -84,3 +84,19 @@ DNSは水道管のように地味なインフラです。蛇口を捻れば水�
 不正確あるいは誤認と思われる箇所がありましたら、必要に応じて適宜改訂を行いますのでGitHubのIssueやPull requestで筆者までお知らせいただけますと幸いです。
 
 @<href>{https://github.com/mochikoAsTech/startDNS}
+
+//embed[latex]{
+\clearpage
+//}
+
+　
+
+//embed[latex]{
+\clearpage
+//}
+
+　
+
+//embed[latex]{
+\clearpage
+//}
