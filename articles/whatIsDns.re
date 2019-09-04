@@ -20,7 +20,7 @@ DNSサーバのDNSはDomain Name Systemの略で、日本語に直訳すると�
 
 ネームサーバは「DNSコンテンツサーバ」「権威DNSサーバ」@<fn>{authoritative}と呼ばれることもありますが、本著では統一してネームサーバと呼びます。
 
-//footnote[authoritative][権威DNSサーバという日本語は「Authoritative Server」（権威のあるサーバ）から来ているようです。DNSで用いられる用語の定義はRFC7719を参照。@<href>{https://tools.ietf.org/html/rfc7719}]
+//footnote[authoritative][権威DNSサーバという日本語は「Authoritative Server」（権威のあるサーバ）から来ているようです。DNSで用いられる用語の定義はRFC8499を参照。@<href>{https://tools.ietf.org/html/rfc8499}]
 
 === フルリゾルバ
 
