@@ -10,7 +10,7 @@
 
 Elasticなこのキモチ みちびいてね Route53
 
-『やめときな』って声はGracierに
+『やめときな』って声はGlacierに
 
 そだててBeanstalk わたしたちのキズナ
 
