@@ -4,5 +4,4 @@ services:
     image: vvakame/review:3.2
     volumes:
       - .:/startDNS
-    build: .
     working_dir: /startDNS
